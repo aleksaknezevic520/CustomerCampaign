@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CustomerCampaign.Data\CustomerCampaign.Data.csproj" />
+    <ProjectReference Include="..\CustomerCampaign.Services\CustomerCampaign.Services.csproj" />
   </ItemGroup>
 
 </Project>

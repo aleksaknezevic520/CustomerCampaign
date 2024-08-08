@@ -4,3 +4,4 @@ GET {{CustomerCampaign.SOAP_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+GET http://localhost:5071/RewardService.asmx

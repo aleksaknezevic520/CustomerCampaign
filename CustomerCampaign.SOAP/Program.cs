@@ -1,34 +1,25 @@
 using CustomerCampaign.Repositories.Models;
+using CustomerCampaign.Services.Interfaces;
+using CustomerCampaign.Services.Services;
 using Microsoft.EntityFrameworkCore;
+using SoapCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-builder.Services.AddControllers();
+builder.Services.AddSoapCore();
 
 // Add db connection
 builder.Services.AddDbContext<CustomerCampaignDbContext>(options =>
     options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=CustomerCampaign;TrustServerCertificate=True;",
         b => b.MigrationsAssembly("CustomerCampaign.SOAP")));
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IRewardService, RewardService>();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseRouting();
 
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
+app.UseSoapEndpoint<IRewardService>("/RewardService.asmx", new SoapEncoderOptions());
 
 app.Run();
