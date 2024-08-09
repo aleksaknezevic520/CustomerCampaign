@@ -4,6 +4,7 @@ using CustomerCampaign.Repositories.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomerCampaign.SOAP.Migrations
 {
     [DbContext(typeof(CustomerCampaignDbContext))]
-    partial class CustomerCampaignDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240809182600_UpdatedTableReferences")]
+    partial class UpdatedTableReferences
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,7 +99,7 @@ namespace CustomerCampaign.SOAP.Migrations
 
                     b.Property<string>("State")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Street")
                         .IsRequired()
@@ -104,9 +107,15 @@ namespace CustomerCampaign.SOAP.Migrations
 
                     b.Property<string>("Zip")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("State")
+                        .IsUnique();
+
+                    b.HasIndex("Zip")
+                        .IsUnique();
 
                     b.ToTable("Addresses");
                 });
@@ -159,6 +168,9 @@ namespace CustomerCampaign.SOAP.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("RwardId")
+                        .HasColumnType("int");
 
                     b.Property<string>("SSN")
                         .IsRequired()

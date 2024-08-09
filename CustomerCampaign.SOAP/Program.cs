@@ -1,7 +1,9 @@
 using CustomerCampaign.Repositories.Models;
 using CustomerCampaign.Services.Interfaces;
 using CustomerCampaign.Services.Services;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using SoapCore;
 
 var builder = WebApplication.CreateBuilder(args);

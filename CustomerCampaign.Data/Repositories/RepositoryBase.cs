@@ -12,11 +12,7 @@ namespace CustomerCampaign.Data.Repositories
             DataContext = dataContext;
         }
 
-        public Task CommitAsync() => DataContext.SaveChangesAsync();
-
-        public void Commit()
-        {
-            DataContext.SaveChanges();
-        }
+        public void Commit() => DataContext.SaveChanges();
+        public async Task CommitAsync() => await DataContext.SaveChangesAsync();
     }
 }
