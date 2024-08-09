@@ -25,6 +25,7 @@ builder.Services.AddScoped<IAgentService, AgentService>();
 // Repositories
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IAgentRepository, AgentRepository>();
+builder.Services.AddScoped<IRewardRepository, RewardRepository>();
 
 var app = builder.Build();
 

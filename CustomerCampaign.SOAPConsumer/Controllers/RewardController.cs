@@ -24,7 +24,7 @@ namespace CustomerCampaign.SOAPConsumer.Controllers
         }
 
         [HttpPost]
-        public async Task<AddCustomerRewardRs> Post([FromBody] AddCustomerRewardRq request)
+        public async Task<AddCustomerRewardRs> AddRewardForCustomer([FromBody] AddCustomerRewardRq request)
         {
             var service = new RewardServiceClient(RewardServiceClient.EndpointConfiguration.BasicHttpBinding_IRewardService);
             return await service.AddCustomerRewardAsync(request);

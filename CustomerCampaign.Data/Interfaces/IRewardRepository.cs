@@ -8,5 +8,6 @@ namespace CustomerCampaign.Data.Interfaces
         Reward GetRewardById(int id);
         void CreateReward(Reward reward);
         void DeleteReward(Reward reward);
+        List<Reward> GetAgentRewardsOnDay(int agentId, DateTime currentDate);
     }
 }

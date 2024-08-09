@@ -8,6 +8,6 @@ namespace CustomerCampaign.SOAP.Interfaces
     public interface IRewardService
     {
         [OperationContract]
-        AddCustomerRewardRs AddCustomerReward (AddCustomerRewardRq rq);
+        Task<AddCustomerRewardRs> AddCustomerReward(AddCustomerRewardRq rq);
     }
 }

@@ -1,15 +1,14 @@
-﻿using System.Runtime.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace CustomerCampaign.SOAP.Models.Requests
 {
-    [DataContract]
     public class AddCustomerRewardRq
     {
-        [DataMember]
+        [Required]
         public int AgentId { get; set; }
-        [DataMember]
+        [Required]
         public int CustomerId { get; set; }
-        [DataMember]
-        public int DiscountPercent { get; set; }
+        [Required]
+        public decimal DiscountPercent { get; set; }
     }
 }

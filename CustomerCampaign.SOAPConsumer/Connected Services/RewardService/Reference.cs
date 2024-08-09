@@ -22,7 +22,7 @@ namespace RewardService
         
         private int CustomerIdField;
         
-        private int DiscountPercentField;
+        private decimal DiscountPercentField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public int AgentId
@@ -51,7 +51,7 @@ namespace RewardService
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int DiscountPercent
+        public decimal DiscountPercent
         {
             get
             {
@@ -66,13 +66,14 @@ namespace RewardService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AddCustomerRewardRs", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Responses")]
-    public partial class AddCustomerRewardRs : object
+    [System.Runtime.Serialization.DataContractAttribute(Name="ResponseBase", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Responses")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(RewardService.AddCustomerRewardRs))]
+    public partial class ResponseBase : object
     {
         
         private string ErrorMessageField;
         
-        private bool SuccessfulSavingField;
+        private bool SuccessField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string ErrorMessage
@@ -88,17 +89,24 @@ namespace RewardService
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool SuccessfulSaving
+        public bool Success
         {
             get
             {
-                return this.SuccessfulSavingField;
+                return this.SuccessField;
             }
             set
             {
-                this.SuccessfulSavingField = value;
+                this.SuccessField = value;
             }
         }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AddCustomerRewardRs", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Responses")]
+    public partial class AddCustomerRewardRs : RewardService.ResponseBase
+    {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]

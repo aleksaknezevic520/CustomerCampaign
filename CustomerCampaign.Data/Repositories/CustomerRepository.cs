@@ -15,7 +15,12 @@ namespace CustomerCampaign.Data.Repositories
             DataContext.Customers.Add(customer);
         }
 
-        public Customer GetCustomer(string ssn)
+        public Customer GetCustomerById(int id)
+        {
+            return DataContext.Customers.SingleOrDefault(x => x.Id == id);
+        }
+
+        public Customer GetCustomerBySSN(string ssn)
         {
             return DataContext.Customers.SingleOrDefault(x => x.SSN == ssn);
         }

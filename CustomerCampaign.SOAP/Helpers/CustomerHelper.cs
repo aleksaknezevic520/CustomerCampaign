@@ -5,7 +5,7 @@ namespace CustomerCampaign.SOAP.Helpers
 {
     public static class CustomerHelper
     {
-        public static Address SetCustomerAddress(AddressCommon customerAddress) =>
+        public static Address MapCustomerAddress(AddressCommon customerAddress) =>
             customerAddress == null ? null : new Address
             {
                 City = customerAddress.City,

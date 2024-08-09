@@ -18,31 +18,22 @@ namespace CustomerCampaign.SOAP.Services
 
         public async Task<CreateAgentRs> CreateAgent(CreateAgentRq request)
         {
-            if(request == null)
+            if (request == null)
                 return new CreateAgentRs
                 {
                     Success = false,
                     ErrorMessage = "Request object is null"
                 };
 
-            var agent = new Agent
-            {
-                Name = request.Name,
-                Email = request.Email,
-                Password = request.Password // TODO: encrypt pwd when saving to db
-            };
-
-            var validationResult = AgentHelper.ValidateAgent(agent);
-            if(!validationResult.IsValid)
-                return new CreateAgentRs
-                {
-                    Success = validationResult.IsValid,
-                    ErrorMessage = validationResult.ErrorMessage
-                };
-
             try
             {
-                _agentRepository.CreateAgent(agent);
+                _agentRepository.CreateAgent(new Agent
+                {
+                    Name = request.Name,
+                    Email = request.Email,
+                    Password = request.Password // TODO: encrypt pwd when saving to db
+                });
+
                 await _agentRepository.CommitAsync();
 
                 return new CreateAgentRs

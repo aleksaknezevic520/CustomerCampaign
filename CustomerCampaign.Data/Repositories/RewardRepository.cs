@@ -19,6 +19,13 @@ namespace CustomerCampaign.Data.Repositories
             return DataContext.Rewards.Find(id);
         }
 
+        public List<Reward> GetAgentRewardsOnDay(int agentId, DateTime currentDate)
+        {
+            return DataContext.Rewards
+                .Where(x => x.AgentId == agentId && x.CreatedDate.Date == currentDate.Date)
+                .ToList();
+        }
+
         public void CreateReward(Reward reward)
         {
             DataContext.Rewards.Add(reward);
