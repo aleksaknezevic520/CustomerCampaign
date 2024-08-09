@@ -67,7 +67,7 @@ namespace CustomerCampaign.SOAPConsumer.Factories
                     customerId++;
                 } while (true);
 
-                await _customerService.SyncCustomersAsync(new SyncCustomersRq() { Customers = customers.ToArray() });
+                await _customerService.SyncCustomersAsync(new SyncCustomersRq { Customers = customers.ToArray() });
                 return new JsonResult(new { Success = true });
             }
             catch (Exception ex)

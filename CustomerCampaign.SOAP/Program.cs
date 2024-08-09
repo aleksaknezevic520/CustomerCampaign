@@ -1,5 +1,6 @@
 using CustomerCampaign.Data.Interfaces;
 using CustomerCampaign.Data.Repositories;
+using CustomerCampaign.Infrastructure.Settings;
 using CustomerCampaign.Repositories.Models;
 using CustomerCampaign.SOAP.Interfaces;
 using CustomerCampaign.SOAP.Services;
@@ -13,13 +14,17 @@ builder.Services.AddSoapCore();
 
 // Add db connection
 builder.Services.AddDbContext<CustomerCampaignDbContext>(options =>
-    options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=CustomerCampaign;TrustServerCertificate=True;",
-        b => b.MigrationsAssembly("CustomerCampaign.SOAP")));
+    options.UseSqlServer(DatabaseSettings.Connection_String,
+        b => b.MigrationsAssembly(DatabaseSettings.Migrations_Assembly)));
 
-// Add services
+// Services
 builder.Services.AddScoped<IRewardService, RewardService>();
-builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<IAgentService, AgentService>();
+
+// Repositories
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IAgentRepository, AgentRepository>();
 
 var app = builder.Build();
 
@@ -28,5 +33,6 @@ app.UseRouting();
 
 app.UseSoapEndpoint<IRewardService>("/RewardService.asmx", new SoapEncoderOptions());
 app.UseSoapEndpoint<ICustomerService>("/CustomerService.asmx", new SoapEncoderOptions());
+app.UseSoapEndpoint<IAgentService>("/AgentService.asmx", new SoapEncoderOptions());
 
 app.Run();
