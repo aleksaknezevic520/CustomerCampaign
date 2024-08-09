@@ -15,4 +15,8 @@
     <ProjectReference Include="..\CustomerCampaign.Infrastructure\CustomerCampaign.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

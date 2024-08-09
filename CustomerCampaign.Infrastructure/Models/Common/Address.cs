@@ -1,4 +1,4 @@
-﻿namespace CustomerCampaign.Services.Models.Common
+﻿namespace CustomerCampaign.Infrastructure.Models.Common
 {
     public class Address
     {

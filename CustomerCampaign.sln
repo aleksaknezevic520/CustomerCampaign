@@ -7,11 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerCampaign.SOAP", "Cu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerCampaign.Data", "CustomerCampaign.Data\CustomerCampaign.Data.csproj", "{B26C6104-FFF8-4501-BDB7-6FCBE12D0A81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerCampaign.Infrastructure", "CustomerCampaign.Infrastructure\CustomerCampaign.Infrastructure.csproj", "{D595AF22-FE29-4E56-A0C0-D37D4FBE033F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerCampaign.Infrastructure", "CustomerCampaign.Infrastructure\CustomerCampaign.Infrastructure.csproj", "{D595AF22-FE29-4E56-A0C0-D37D4FBE033F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerCampaign.Services", "CustomerCampaign.Services\CustomerCampaign.Services.csproj", "{D39872B8-AD06-4E7E-B742-F4690303F75C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerCampaign.SOAPConsumer", "CustomerCampaign.SOAPConsumer\CustomerCampaign.SOAPConsumer.csproj", "{CB9A3D2A-5AF7-4201-BE3E-8523721D1051}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerCampaign.SOAPConsumer", "CustomerCampaign.SOAPConsumer\CustomerCampaign.SOAPConsumer.csproj", "{CB9A3D2A-5AF7-4201-BE3E-8523721D1051}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +29,6 @@ Global
 		{D595AF22-FE29-4E56-A0C0-D37D4FBE033F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D595AF22-FE29-4E56-A0C0-D37D4FBE033F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D595AF22-FE29-4E56-A0C0-D37D4FBE033F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D39872B8-AD06-4E7E-B742-F4690303F75C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D39872B8-AD06-4E7E-B742-F4690303F75C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D39872B8-AD06-4E7E-B742-F4690303F75C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D39872B8-AD06-4E7E-B742-F4690303F75C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CB9A3D2A-5AF7-4201-BE3E-8523721D1051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CB9A3D2A-5AF7-4201-BE3E-8523721D1051}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB9A3D2A-5AF7-4201-BE3E-8523721D1051}.Release|Any CPU.ActiveCfg = Release|Any CPU

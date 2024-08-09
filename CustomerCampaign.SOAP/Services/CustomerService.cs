@@ -1,11 +1,10 @@
 ﻿using CustomerCampaign.Data.Interfaces;
 using CustomerCampaign.Repositories.Models;
-using CustomerCampaign.Services.Helpers;
-using CustomerCampaign.Services.Interfaces;
-using CustomerCampaign.Services.Models.Common;
-using CustomerCampaign.Services.Models.Requests;
+using CustomerCampaign.SOAP.Helpers;
+using CustomerCampaign.SOAP.Interfaces;
+using CustomerCampaign.SOAP.Models.Requests;
 
-namespace CustomerCampaign.Services.Services
+namespace CustomerCampaign.SOAP.Services
 {
     public class CustomerService : ICustomerService
     {
@@ -25,7 +24,7 @@ namespace CustomerCampaign.Services.Services
                 var workAddress = CustomerHelper.SetCustomerAddress(customerRq.WorkAddress);
                 if (customer == null)
                 {
-                    _customerRepository.AddCustomer(new Repositories.Models.Customer
+                    _customerRepository.AddCustomer(new Customer
                     {
                         Name = customerRq.Name,
                         SSN = customerRq.SSN,
@@ -48,7 +47,7 @@ namespace CustomerCampaign.Services.Services
 
         public async Task AddCustomer(AddCustomerRq request)
         {
-            var customer = new Repositories.Models.Customer
+            var customer = new Customer
             {
                 Name = request.Name,
                 SSN = request.SSN,

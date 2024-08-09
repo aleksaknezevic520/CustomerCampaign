@@ -7,16 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CustomerCampaign.SOAP
+namespace RewardService
 {
     using System.Runtime.Serialization;
     
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AddCustomerRewardRq", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.Services.Models.Requests" +
-        "")]
-    public partial class AddCustomerRewardRq : object, System.ComponentModel.INotifyPropertyChanged
+    [System.Runtime.Serialization.DataContractAttribute(Name="AddCustomerRewardRq", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Requests")]
+    public partial class AddCustomerRewardRq : object
     {
         
         private int AgentIdField;
@@ -34,11 +33,7 @@ namespace CustomerCampaign.SOAP
             }
             set
             {
-                if ((this.AgentIdField.Equals(value) != true))
-                {
-                    this.AgentIdField = value;
-                    this.RaisePropertyChanged("AgentId");
-                }
+                this.AgentIdField = value;
             }
         }
         
@@ -51,11 +46,7 @@ namespace CustomerCampaign.SOAP
             }
             set
             {
-                if ((this.CustomerIdField.Equals(value) != true))
-                {
-                    this.CustomerIdField = value;
-                    this.RaisePropertyChanged("CustomerId");
-                }
+                this.CustomerIdField = value;
             }
         }
         
@@ -68,31 +59,15 @@ namespace CustomerCampaign.SOAP
             }
             set
             {
-                if ((this.DiscountPercentField.Equals(value) != true))
-                {
-                    this.DiscountPercentField = value;
-                    this.RaisePropertyChanged("DiscountPercent");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName)
-        {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null))
-            {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+                this.DiscountPercentField = value;
             }
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AddCustomerRewardRs", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.Services.Models.Response" +
-        "s")]
-    public partial class AddCustomerRewardRs : object, System.ComponentModel.INotifyPropertyChanged
+    [System.Runtime.Serialization.DataContractAttribute(Name="AddCustomerRewardRs", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Responses")]
+    public partial class AddCustomerRewardRs : object
     {
         
         private string ErrorMessageField;
@@ -108,11 +83,7 @@ namespace CustomerCampaign.SOAP
             }
             set
             {
-                if ((object.ReferenceEquals(this.ErrorMessageField, value) != true))
-                {
-                    this.ErrorMessageField = value;
-                    this.RaisePropertyChanged("ErrorMessage");
-                }
+                this.ErrorMessageField = value;
             }
         }
         
@@ -125,43 +96,31 @@ namespace CustomerCampaign.SOAP
             }
             set
             {
-                if ((this.SuccessfulSavingField.Equals(value) != true))
-                {
-                    this.SuccessfulSavingField = value;
-                    this.RaisePropertyChanged("SuccessfulSaving");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName)
-        {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null))
-            {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+                this.SuccessfulSavingField = value;
             }
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="CustomerCampaign.SOAP.IRewardService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="RewardService.IRewardService")]
     public interface IRewardService
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRewardService/AddCustomerReward", ReplyAction="http://tempuri.org/IRewardService/AddCustomerRewardResponse")]
-        System.Threading.Tasks.Task<CustomerCampaign.SOAP.AddCustomerRewardRs> AddCustomerRewardAsync(CustomerCampaign.SOAP.AddCustomerRewardRq rq);
+        RewardService.AddCustomerRewardRs AddCustomerReward(RewardService.AddCustomerRewardRq rq);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRewardService/AddCustomerReward", ReplyAction="http://tempuri.org/IRewardService/AddCustomerRewardResponse")]
+        System.Threading.Tasks.Task<RewardService.AddCustomerRewardRs> AddCustomerRewardAsync(RewardService.AddCustomerRewardRq rq);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface IRewardServiceChannel : CustomerCampaign.SOAP.IRewardService, System.ServiceModel.IClientChannel
+    public interface IRewardServiceChannel : RewardService.IRewardService, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class RewardServiceClient : System.ServiceModel.ClientBase<CustomerCampaign.SOAP.IRewardService>, CustomerCampaign.SOAP.IRewardService
+    public partial class RewardServiceClient : System.ServiceModel.ClientBase<RewardService.IRewardService>, RewardService.IRewardService
     {
         
         /// <summary>
@@ -204,7 +163,12 @@ namespace CustomerCampaign.SOAP
         {
         }
         
-        public System.Threading.Tasks.Task<CustomerCampaign.SOAP.AddCustomerRewardRs> AddCustomerRewardAsync(CustomerCampaign.SOAP.AddCustomerRewardRq rq)
+        public RewardService.AddCustomerRewardRs AddCustomerReward(RewardService.AddCustomerRewardRq rq)
+        {
+            return base.Channel.AddCustomerReward(rq);
+        }
+        
+        public System.Threading.Tasks.Task<RewardService.AddCustomerRewardRs> AddCustomerRewardAsync(RewardService.AddCustomerRewardRq rq)
         {
             return base.Channel.AddCustomerRewardAsync(rq);
         }

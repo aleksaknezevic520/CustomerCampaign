@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace CustomerCampaign.Services.Models.Responses
+namespace CustomerCampaign.SOAP.Models.Responses
 {
     [DataContract]
     public class AddCustomerRewardRs

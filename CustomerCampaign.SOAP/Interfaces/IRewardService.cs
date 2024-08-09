@@ -1,8 +1,8 @@
-﻿using CustomerCampaign.Services.Models.Requests;
-using CustomerCampaign.Services.Models.Responses;
+﻿using CustomerCampaign.SOAP.Models.Requests;
+using CustomerCampaign.SOAP.Models.Responses;
 using System.ServiceModel;
 
-namespace CustomerCampaign.Services.Interfaces
+namespace CustomerCampaign.SOAP.Interfaces
 {
     [ServiceContract]
     public interface IRewardService

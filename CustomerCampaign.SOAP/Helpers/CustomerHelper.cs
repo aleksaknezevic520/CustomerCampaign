@@ -1,11 +1,11 @@
-﻿using CustomerCampaign.Infrastructure.Enums;
+﻿using AddressCommon = CustomerCampaign.Infrastructure.Models.Common.Address;
 using CustomerCampaign.Repositories.Models;
 
-namespace CustomerCampaign.Services.Helpers
+namespace CustomerCampaign.SOAP.Helpers
 {
     public static class CustomerHelper
     {
-        public static Address SetCustomerAddress(Models.Common.Address customerAddress) =>
+        public static Address SetCustomerAddress(AddressCommon customerAddress) =>
             customerAddress == null ? null : new Address
             {
                 City = customerAddress.City,

@@ -1,24 +1,25 @@
-﻿using CustomerCampaign.Services.Interfaces;
-using CustomerCampaign.Services.Models.Common;
-using CustomerCampaign.Services.Models.Requests;
-using CustomerCampaign.SOAP;
+﻿using CustomerService;
 using Microsoft.AspNetCore.Mvc;
+using RewardService;
 using SoapDemo;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using CustomerServiceAddress = CustomerService.Address;
 
 namespace CustomerCampaign.SOAPConsumer.Factories
 {
     public class CustomerFactory
     {
-        private readonly ICustomerService _customerService;
         private readonly SOAPDemoSoapClient _customerClient;
+        private readonly RewardServiceClient _rewardService;
+        private readonly CustomerServiceClient _customerService;
 
-        public CustomerFactory(ICustomerService customerService)
+        public CustomerFactory()
         {
-            _customerService = customerService;
+            _rewardService = new RewardServiceClient(RewardServiceClient.EndpointConfiguration.BasicHttpBinding_IRewardService);
+            _customerService = new CustomerServiceClient(CustomerServiceClient.EndpointConfiguration.BasicHttpBinding_ICustomerService);
             _customerClient = new SOAPDemoSoapClient(SOAPDemoSoapClient.EndpointConfiguration.SOAPDemoSoap);
         }
 
@@ -26,8 +27,8 @@ namespace CustomerCampaign.SOAPConsumer.Factories
         {
             try
             {
-                var request = new SyncCustomersRq { Customers = new List<Customer>() };
                 var customerId = 1;
+                var customers = new List<Customer>();
                 do
                 {
                     var customer = await _customerClient.FindPersonAsync(customerId.ToString());
@@ -44,7 +45,7 @@ namespace CustomerCampaign.SOAPConsumer.Factories
                     };
 
                     if (customer.Home != null)
-                        customerRq.HomeAddress = new Services.Models.Common.Address
+                        customerRq.HomeAddress = new CustomerServiceAddress
                         {
                             City = customer.Home.City,
                             State = customer.Home.State,
@@ -53,7 +54,7 @@ namespace CustomerCampaign.SOAPConsumer.Factories
                         };
 
                     if (customer.Office != null)
-                        customerRq.WorkAddress = new Services.Models.Common.Address
+                        customerRq.WorkAddress = new CustomerServiceAddress
                         {
                             City = customer.Office.City,
                             State = customer.Office.State,
@@ -61,12 +62,12 @@ namespace CustomerCampaign.SOAPConsumer.Factories
                             Zip = customer.Office.Zip
                         };
 
-                    request.Customers.Add(customerRq);
+                    customers.Add(customerRq);
 
                     customerId++;
                 } while (true);
 
-                await _customerService.SyncCustomers(request);
+                await _customerService.SyncCustomersAsync(new SyncCustomersRq() { Customers = customers.ToArray() });
                 return new JsonResult(new { Success = true });
             }
             catch (Exception ex)

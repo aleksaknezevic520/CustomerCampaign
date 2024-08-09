@@ -1,9 +1,8 @@
-﻿using CustomerCampaign.Services.Models.Common;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace CustomerCampaign.Services.Models.Requests
+namespace CustomerCampaign.Infrastructure.Models.Common
 {
-    public class AddCustomerRq
+    public class Customer
     {
         [Required]
         public string Name { get; set; }

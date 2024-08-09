@@ -1,5 +1,5 @@
-﻿using CustomerCampaign.SOAP;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using RewardService;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

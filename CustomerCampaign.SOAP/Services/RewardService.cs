@@ -1,8 +1,8 @@
-﻿using CustomerCampaign.Services.Interfaces;
-using CustomerCampaign.Services.Models.Requests;
-using CustomerCampaign.Services.Models.Responses;
+﻿using CustomerCampaign.SOAP.Interfaces;
+using CustomerCampaign.SOAP.Models.Requests;
+using CustomerCampaign.SOAP.Models.Responses;
 
-namespace CustomerCampaign.Services.Services
+namespace CustomerCampaign.SOAP.Services
 {
     public class RewardService : IRewardService
     {
