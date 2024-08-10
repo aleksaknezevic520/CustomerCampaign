@@ -13,7 +13,10 @@ namespace CustomerCampaign.Repositories.Models
         public string Email { get; set; }
 
         [Required]
-        public string Password { get; set; }
+        public string HashedPassword { get; set; }
+
+        [Required]
+        public string Salt { get; set; }
 
         public virtual ICollection<Reward> AssignedByRewards { get; set; }
     }

@@ -23,11 +23,14 @@ namespace CustomerCampaign.SOAP.Services
 
             try
             {
+                var (hashedPassword, salt) = PasswordHelper.HashPassword(request.Password);
+
                 _agentRepository.CreateAgent(new Agent
                 {
                     Name = request.Name,
                     Email = request.Email,
-                    Password = request.Password // TODO: encrypt pwd when saving to db
+                    HashedPassword = hashedPassword,
+                    Salt = salt
                 });
 
                 await _agentRepository.CommitAsync();

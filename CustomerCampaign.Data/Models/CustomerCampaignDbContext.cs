@@ -28,6 +28,12 @@ namespace CustomerCampaign.Repositories.Models
             modelBuilder.Entity<Agent>()
                 .HasIndex(a => a.Email)
                 .IsUnique();
+            modelBuilder.Entity<Agent>()
+                .HasIndex(a => a.HashedPassword)
+                .IsUnique();
+            modelBuilder.Entity<Agent>()
+                .HasIndex(a => a.Salt)
+                .IsUnique();
             modelBuilder.Entity<Customer>()
                 .HasIndex(c => c.SSN)
                 .IsUnique();

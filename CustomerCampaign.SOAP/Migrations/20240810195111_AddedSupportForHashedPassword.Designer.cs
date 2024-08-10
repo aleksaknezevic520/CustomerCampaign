@@ -4,6 +4,7 @@ using CustomerCampaign.Repositories.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomerCampaign.SOAP.Migrations
 {
     [DbContext(typeof(CustomerCampaignDbContext))]
-    partial class CustomerCampaignDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240810195111_AddedSupportForHashedPassword")]
+    partial class AddedSupportForHashedPassword
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,7 +117,7 @@ namespace CustomerCampaign.SOAP.Migrations
 
                     b.Property<string>("HashedPassword")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -122,17 +125,11 @@ namespace CustomerCampaign.SOAP.Migrations
 
                     b.Property<string>("Salt")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.HasIndex("HashedPassword")
-                        .IsUnique();
-
-                    b.HasIndex("Salt")
                         .IsUnique();
 
                     b.ToTable("Agents");
