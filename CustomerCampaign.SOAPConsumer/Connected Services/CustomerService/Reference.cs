@@ -188,6 +188,7 @@ namespace CustomerService
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ResponseBase", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Responses")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CustomerService.AddCustomerRs))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(CustomerService.SyncCustomersRs))]
     public partial class ResponseBase : object
     {
@@ -221,6 +222,13 @@ namespace CustomerService
                 this.SuccessField = value;
             }
         }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AddCustomerRs", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Responses")]
+    public partial class AddCustomerRs : CustomerService.ResponseBase
+    {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -318,16 +326,10 @@ namespace CustomerService
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerService/SyncCustomers", ReplyAction="http://tempuri.org/ICustomerService/SyncCustomersResponse")]
-        CustomerService.SyncCustomersRs SyncCustomers(CustomerService.SyncCustomersRq request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerService/SyncCustomers", ReplyAction="http://tempuri.org/ICustomerService/SyncCustomersResponse")]
         System.Threading.Tasks.Task<CustomerService.SyncCustomersRs> SyncCustomersAsync(CustomerService.SyncCustomersRq request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerService/AddCustomer", ReplyAction="http://tempuri.org/ICustomerService/AddCustomerResponse")]
-        void AddCustomer(CustomerService.AddCustomerRq request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerService/AddCustomer", ReplyAction="http://tempuri.org/ICustomerService/AddCustomerResponse")]
-        System.Threading.Tasks.Task AddCustomerAsync(CustomerService.AddCustomerRq request);
+        System.Threading.Tasks.Task<CustomerService.AddCustomerRs> AddCustomerAsync(CustomerService.AddCustomerRq request);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
@@ -380,22 +382,12 @@ namespace CustomerService
         {
         }
         
-        public CustomerService.SyncCustomersRs SyncCustomers(CustomerService.SyncCustomersRq request)
-        {
-            return base.Channel.SyncCustomers(request);
-        }
-        
         public System.Threading.Tasks.Task<CustomerService.SyncCustomersRs> SyncCustomersAsync(CustomerService.SyncCustomersRq request)
         {
             return base.Channel.SyncCustomersAsync(request);
         }
         
-        public void AddCustomer(CustomerService.AddCustomerRq request)
-        {
-            base.Channel.AddCustomer(request);
-        }
-        
-        public System.Threading.Tasks.Task AddCustomerAsync(CustomerService.AddCustomerRq request)
+        public System.Threading.Tasks.Task<CustomerService.AddCustomerRs> AddCustomerAsync(CustomerService.AddCustomerRq request)
         {
             return base.Channel.AddCustomerAsync(request);
         }

@@ -10,7 +10,6 @@
     "namespaceMappings": [
       "*, AgentService"
     ],
-    "sync": true,
     "targetFramework": "net8.0",
     "typeReuseMode": "All"
   }

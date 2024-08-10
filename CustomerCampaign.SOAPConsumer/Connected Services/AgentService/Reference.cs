@@ -115,9 +115,6 @@ namespace AgentService
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAgentService/CreateAgent", ReplyAction="http://tempuri.org/IAgentService/CreateAgentResponse")]
-        AgentService.CreateAgentRs CreateAgent(AgentService.CreateAgentRq request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAgentService/CreateAgent", ReplyAction="http://tempuri.org/IAgentService/CreateAgentResponse")]
         System.Threading.Tasks.Task<AgentService.CreateAgentRs> CreateAgentAsync(AgentService.CreateAgentRq request);
     }
     
@@ -169,11 +166,6 @@ namespace AgentService
         public AgentServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress)
         {
-        }
-        
-        public AgentService.CreateAgentRs CreateAgent(AgentService.CreateAgentRq request)
-        {
-            return base.Channel.CreateAgent(request);
         }
         
         public System.Threading.Tasks.Task<AgentService.CreateAgentRs> CreateAgentAsync(AgentService.CreateAgentRq request)

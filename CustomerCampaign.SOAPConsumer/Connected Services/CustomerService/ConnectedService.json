@@ -10,7 +10,6 @@
     "namespaceMappings": [
       "*, CustomerService"
     ],
-    "sync": true,
     "targetFramework": "net8.0",
     "typeReuseMode": "All"
   }

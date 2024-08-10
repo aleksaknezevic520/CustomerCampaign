@@ -24,10 +24,10 @@ namespace CustomerCampaign.SOAPConsumer.Controllers
         }
 
         [HttpPost]
-        public async Task<AddCustomerRewardRs> AddRewardForCustomer([FromBody] AddCustomerRewardRq request)
+        public async Task<AddRewardRs> AddRewardForCustomer([FromBody] AddRewardRq request)
         {
             var service = new RewardServiceClient(RewardServiceClient.EndpointConfiguration.BasicHttpBinding_IRewardService);
-            return await service.AddCustomerRewardAsync(request);
+            return await service.AddRewardAsync(request);
         }
 
         [HttpPut("{id}")]
