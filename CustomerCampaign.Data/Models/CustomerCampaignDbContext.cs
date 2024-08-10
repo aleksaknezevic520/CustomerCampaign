@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CustomerCampaign.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace CustomerCampaign.Repositories.Models
         public virtual DbSet<Agent> Agents { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Reward> Rewards { get; set; }
+        public virtual DbSet<Purchase> Purchases { get; set; }
+        public virtual DbSet<PurchaseItem> PurchaseItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -33,6 +36,11 @@ namespace CustomerCampaign.Repositories.Models
                 .IsUnique();
             modelBuilder.Entity<Reward>()
                 .HasKey(r => new { r.AgentId, r.CustomerId });
+            modelBuilder.Entity<PurchaseItem>()
+                .HasKey(pi => new { pi.Id, pi.PurchaseId});
+            modelBuilder.Entity<PurchaseItem>()
+                .HasOne(pi => pi.Purchase)
+                .WithMany(p => p.PurchaseItems);
         }
     }
 }
