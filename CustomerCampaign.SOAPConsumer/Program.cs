@@ -10,6 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<CustomerFactory>();
 builder.Services.AddScoped<AgentFactory>();
 builder.Services.AddScoped<RewardFactory>();
+builder.Services.AddScoped<ReportFactory>();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

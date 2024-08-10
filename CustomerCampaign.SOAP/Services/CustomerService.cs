@@ -26,8 +26,8 @@ namespace CustomerCampaign.SOAP.Services
                 foreach (var customerRq in request.Customers)
                 {
                     var customer = _customerRepository.GetCustomerBySSN(customerRq.SSN);
-                    var homeAddress = CustomerHelper.MapCustomerAddress(customerRq.HomeAddress);
-                    var workAddress = CustomerHelper.MapCustomerAddress(customerRq.WorkAddress);
+                    var homeAddress = ObjectMapper.MapCustomerAddress(customerRq.HomeAddress);
+                    var workAddress = ObjectMapper.MapCustomerAddress(customerRq.WorkAddress);
                     if (customer == null)
                     {
                         _customerRepository.AddCustomer(new Customer
@@ -68,8 +68,8 @@ namespace CustomerCampaign.SOAP.Services
                     SSN = request.SSN,
                     DateOfBirth = request.DateOfBirth,
                     IsLoyal = true,
-                    HomeAddress = CustomerHelper.MapCustomerAddress(request.HomeAddress),
-                    WorkAddress = CustomerHelper.MapCustomerAddress(request.HomeAddress)
+                    HomeAddress = ObjectMapper.MapCustomerAddress(request.HomeAddress),
+                    WorkAddress = ObjectMapper.MapCustomerAddress(request.HomeAddress)
                 };
 
                 _customerRepository.AddCustomer(customer);

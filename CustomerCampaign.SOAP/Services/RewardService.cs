@@ -1,5 +1,5 @@
 ﻿using CustomerCampaign.Data.Interfaces;
-using CustomerCampaign.Infrastructure.Settings;
+using CustomerCampaign.Infrastructure;
 using CustomerCampaign.Repositories.Models;
 using CustomerCampaign.SOAP.Helpers;
 using CustomerCampaign.SOAP.Interfaces;
@@ -30,7 +30,7 @@ namespace CustomerCampaign.SOAP.Services
 
                 var response = new GetRewardRs(null);
                 if(reward is not null)
-                    response.Reward = RewardHelper.MapReward(reward);
+                    response.Reward = ObjectMapper.MapReward(reward);
 
                 return response;
             }
@@ -47,7 +47,7 @@ namespace CustomerCampaign.SOAP.Services
                 var rewards = await _rewardRepository.GetRewardsAsync();
 
                 var response = new GetRewardsRs(null);
-                response.Rewards = RewardHelper.MapRewards(rewards);
+                response.Rewards = ObjectMapper.MapRewards(rewards);
 
                 return response;
             }
@@ -64,7 +64,7 @@ namespace CustomerCampaign.SOAP.Services
                 var rewards = await _rewardRepository.GetRewardsForAgentAsync(agentId);                
 
                 var response = new GetRewardsRs(null);
-                response.Rewards = RewardHelper.MapRewards(rewards);
+                response.Rewards = ObjectMapper.MapRewards(rewards);
 
                 return response;
             }
@@ -81,7 +81,7 @@ namespace CustomerCampaign.SOAP.Services
                 var rewards = await _rewardRepository.GetRewardsForCustomerAsync(customerId);
 
                 var response = new GetRewardsRs(null);
-                response.Rewards = RewardHelper.MapRewards(rewards);
+                response.Rewards = ObjectMapper.MapRewards(rewards);
 
                 return response;
             }
@@ -103,7 +103,7 @@ namespace CustomerCampaign.SOAP.Services
             if(agent is null)
                 return new AddRewardRs("Agent not found");
 
-            if (agentRewardsOnDay?.Count >= AgentRewardLimitSettings.Max_Rewards_Per_Day)
+            if (agentRewardsOnDay?.Count >= Constants.Max_Rewards_Per_Day)
                 return new AddRewardRs("Daily rewards limit is reached");
 
             var customer = _customerRepository.GetCustomerById(rq.CustomerId);

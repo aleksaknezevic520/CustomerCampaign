@@ -1,6 +1,5 @@
 ﻿using CustomerCampaign.SOAPConsumer.Factories;
 using Microsoft.AspNetCore.Mvc;
-using SoapDemo;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -19,6 +18,7 @@ namespace CustomerCampaign.SOAPConsumer.Controllers
         }
 
         [HttpPost]
+        [Route(nameof(SyncCustomers))]
         public async Task<JsonResult> SyncCustomers() => await _customerFactory.SyncCustomers();
         
     }

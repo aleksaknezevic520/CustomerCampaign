@@ -17,7 +17,7 @@ namespace CustomerCampaign.Data.Models
                 if (PurchaseItems is null || PurchaseItems.Count == 0)
                     return 0;
 
-                return PurchaseItems.Sum(x => x.Amount * x.Price);
+                return PurchaseItems.Sum(x => x.Amount * x.UnitPrice);
             }
         }
 

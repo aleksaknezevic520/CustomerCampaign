@@ -22,11 +22,13 @@ builder.Services.AddDbContext<CustomerCampaignDbContext>(options =>
 builder.Services.AddScoped<IRewardService, RewardService>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<IAgentService, AgentService>();
+builder.Services.AddScoped<IReportService, ReportService>();
 
 // Repositories
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IAgentRepository, AgentRepository>();
 builder.Services.AddScoped<IRewardRepository, RewardRepository>();
+builder.Services.AddScoped<IPurchaseRepository, PurchaseRepository>();
 
 var app = builder.Build();
 
@@ -36,5 +38,6 @@ app.UseRouting();
 app.UseSoapEndpoint<IRewardService>("/RewardService.asmx", new SoapEncoderOptions());
 app.UseSoapEndpoint<ICustomerService>("/CustomerService.asmx", new SoapEncoderOptions());
 app.UseSoapEndpoint<IAgentService>("/AgentService.asmx", new SoapEncoderOptions());
+app.UseSoapEndpoint<IReportService>("/ReportService.asmx", new SoapEncoderOptions());
 
 app.Run();
