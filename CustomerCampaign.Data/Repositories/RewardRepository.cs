@@ -1,5 +1,7 @@
 ﻿using CustomerCampaign.Data.Interfaces;
 using CustomerCampaign.Repositories.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata.Ecma335;
 
 namespace CustomerCampaign.Data.Repositories
 {
@@ -9,21 +11,35 @@ namespace CustomerCampaign.Data.Repositories
         {
         }
 
-        public List<Reward> GetRewards()
+        public async Task<Reward> GetRewardByIdAsync(int agentId, int customerId)
         {
-            return DataContext.Rewards.ToList();
+            return await DataContext.Rewards.FindAsync(new { agentId, customerId });
         }
 
-        public Reward GetRewardById(int id)
+        public async Task<List<Reward>> GetRewardsAsync()
         {
-            return DataContext.Rewards.Find(id);
+            return await DataContext.Rewards.ToListAsync();
         }
 
-        public List<Reward> GetAgentRewardsOnDay(int agentId, DateTime currentDate)
+        public async Task<List<Reward>> GetRewardsForCustomerAsync(int customerId)
         {
-            return DataContext.Rewards
+            return await DataContext.Rewards
+                .Where(x => x.CustomerId == customerId)
+                .ToListAsync();
+        }
+
+        public async Task<List<Reward>> GetRewardsForAgentAsync(int agentId)
+        {
+            return await DataContext.Rewards
+                .Where(x => x.AgentId == agentId)
+                .ToListAsync();
+        }
+
+        public async Task<List<Reward>> GetAgentRewardsOnDayAsync(int agentId, DateTime currentDate)
+        {
+            return await DataContext.Rewards
                 .Where(x => x.AgentId == agentId && x.CreatedDate.Date == currentDate.Date)
-                .ToList();
+                .ToListAsync();
         }
 
         public void CreateReward(Reward reward)

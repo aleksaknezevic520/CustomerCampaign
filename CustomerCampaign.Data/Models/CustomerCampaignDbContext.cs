@@ -31,6 +31,8 @@ namespace CustomerCampaign.Repositories.Models
             modelBuilder.Entity<Reward>()
                 .HasIndex(r => new { r.AgentId, r.CustomerId, r.CreatedDate })
                 .IsUnique();
+            modelBuilder.Entity<Reward>()
+                .HasKey(r => new { r.AgentId, r.CustomerId });
         }
     }
 }

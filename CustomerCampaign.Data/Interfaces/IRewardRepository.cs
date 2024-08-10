@@ -4,10 +4,12 @@ namespace CustomerCampaign.Data.Interfaces
 {
     public interface IRewardRepository : IRepositoryBase
     {
-        List<Reward> GetRewards();
-        Reward GetRewardById(int id);
+        Task<Reward> GetRewardByIdAsync(int agentId, int customerId);
+        Task<List<Reward>> GetRewardsAsync();
+        Task<List<Reward>> GetRewardsForCustomerAsync(int customerId);
+        Task<List<Reward>> GetRewardsForAgentAsync(int agentId);
+        Task<List<Reward>> GetAgentRewardsOnDayAsync(int agentId, DateTime currentDate);
         void CreateReward(Reward reward);
         void DeleteReward(Reward reward);
-        List<Reward> GetAgentRewardsOnDay(int agentId, DateTime currentDate);
     }
 }

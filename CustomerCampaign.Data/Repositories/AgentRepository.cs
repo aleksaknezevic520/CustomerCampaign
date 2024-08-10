@@ -9,6 +9,11 @@ namespace CustomerCampaign.Data.Repositories
         {
         }
 
+        public Agent GetAgentById(int id)
+        {
+            return DataContext.Agents.Find(id);
+        }
+
         public void CreateAgent(Agent agent)
         {
             DataContext.Agents.Add(agent);

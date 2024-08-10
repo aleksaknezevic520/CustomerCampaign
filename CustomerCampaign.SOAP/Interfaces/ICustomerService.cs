@@ -11,6 +11,6 @@ namespace CustomerCampaign.SOAP.Interfaces
         Task<SyncCustomersRs> SyncCustomers(SyncCustomersRq request);
 
         [OperationContract]
-        Task AddCustomer(AddCustomerRq request);
+        Task<AddCustomerRs> AddCustomer(AddCustomerRq request);
     }
 }

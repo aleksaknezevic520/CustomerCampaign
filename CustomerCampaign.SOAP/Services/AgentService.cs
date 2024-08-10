@@ -19,11 +19,7 @@ namespace CustomerCampaign.SOAP.Services
         public async Task<CreateAgentRs> CreateAgent(CreateAgentRq request)
         {
             if (request == null)
-                return new CreateAgentRs
-                {
-                    Success = false,
-                    ErrorMessage = "Request object is null"
-                };
+                return new CreateAgentRs("Request object is null");
 
             try
             {
@@ -36,19 +32,11 @@ namespace CustomerCampaign.SOAP.Services
 
                 await _agentRepository.CommitAsync();
 
-                return new CreateAgentRs
-                {
-                    Success = true,
-                    ErrorMessage = null
-                };
+                return new CreateAgentRs(null);
             }
             catch (Exception)
             {
-                return new CreateAgentRs
-                {
-                    Success = false,
-                    ErrorMessage = "Un error occured while saving agent"
-                };
+                return new CreateAgentRs("Un error occured while saving agent");
             }
         }
     }

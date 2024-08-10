@@ -2,6 +2,8 @@
 {
     public class CreateAgentRs : ResponseBase
     {
-
+        public CreateAgentRs(string errorMessage) : base(errorMessage)
+        {
+        }
     }
 }

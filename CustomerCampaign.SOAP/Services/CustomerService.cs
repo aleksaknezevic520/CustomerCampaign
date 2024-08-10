@@ -19,11 +19,7 @@ namespace CustomerCampaign.SOAP.Services
         public async Task<SyncCustomersRs> SyncCustomers(SyncCustomersRq request)
         {
             if (request == null)
-                return new SyncCustomersRs
-                {
-                    Success = false,
-                    ErrorMessage = "Request object is null"
-                };
+                return new SyncCustomersRs("Request object is null");
 
             try
             {
@@ -54,32 +50,37 @@ namespace CustomerCampaign.SOAP.Services
 
                 await _customerRepository.CommitAsync();
 
-                return new SyncCustomersRs { Success = true };
+                return new SyncCustomersRs(null);
             }
             catch (Exception)
             {
-                return new SyncCustomersRs
-                {
-                    Success = false,
-                    ErrorMessage = "Un error occured while synchronizing customers"
-                };
+                return new SyncCustomersRs("Unknown error occured while synchronizing customers");
             }
         }
 
-        public async Task AddCustomer(AddCustomerRq request)
+        public async Task<AddCustomerRs> AddCustomer(AddCustomerRq request)
         {
-            var customer = new Customer
+            try
             {
-                Name = request.Name,
-                SSN = request.SSN,
-                DateOfBirth = request.DateOfBirth,
-                IsLoyal = true,
-                HomeAddress = CustomerHelper.MapCustomerAddress(request.HomeAddress),
-                WorkAddress = CustomerHelper.MapCustomerAddress(request.HomeAddress)
-            };
+                var customer = new Customer
+                {
+                    Name = request.Name,
+                    SSN = request.SSN,
+                    DateOfBirth = request.DateOfBirth,
+                    IsLoyal = true,
+                    HomeAddress = CustomerHelper.MapCustomerAddress(request.HomeAddress),
+                    WorkAddress = CustomerHelper.MapCustomerAddress(request.HomeAddress)
+                };
 
-            _customerRepository.AddCustomer(customer);
-            await _customerRepository.CommitAsync();
+                _customerRepository.AddCustomer(customer);
+                await _customerRepository.CommitAsync();
+
+                return new AddCustomerRs(null);
+            }
+            catch (Exception)
+            {
+                return new AddCustomerRs("Unknown error occurred while saving customer");
+            }
         }
     }
 }

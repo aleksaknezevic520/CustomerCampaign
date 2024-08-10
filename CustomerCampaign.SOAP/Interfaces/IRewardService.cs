@@ -8,6 +8,24 @@ namespace CustomerCampaign.SOAP.Interfaces
     public interface IRewardService
     {
         [OperationContract]
-        Task<AddCustomerRewardRs> AddCustomerReward(AddCustomerRewardRq rq);
+        Task<GetRewardRs> GetRewardByIdAsync(int agentId, int customerId);
+
+        [OperationContract]
+        Task<GetRewardsRs> GetRewards();
+
+        [OperationContract]
+        Task<GetRewardsRs> GetRewardsForAgent(int AgentId);
+
+        [OperationContract]
+        Task<GetRewardsRs> GetRewardsForCustomer(int customerId);
+
+        [OperationContract]
+        Task<AddRewardRs> AddReward(AddRewardRq rq);
+
+        [OperationContract]
+        Task<UpdateRewardRs> UpdateReward(UpdateRewardRq rq);
+
+        [OperationContract]
+        Task<DeleteRewardRs> DeleteReward(DeleteRewardRq rq);
     }
 }
