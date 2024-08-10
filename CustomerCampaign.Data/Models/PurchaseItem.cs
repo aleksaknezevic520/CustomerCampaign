@@ -9,7 +9,10 @@ namespace CustomerCampaign.Data.Models
 
         [Required]
         public string Name { get; set; }
+        [Required, Range(0, double.MaxValue)]
         public decimal Price { get; set; }
+
+        [Required, Range(1, int.MaxValue)]
         public int Amount { get; set; }
 
         public virtual Purchase Purchase { get; set; }

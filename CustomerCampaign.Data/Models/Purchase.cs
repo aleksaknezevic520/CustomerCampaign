@@ -1,5 +1,4 @@
 ﻿using CustomerCampaign.Repositories.Models;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CustomerCampaign.Data.Models
@@ -8,9 +7,19 @@ namespace CustomerCampaign.Data.Models
     {
         public int Id { get; set; }
         public DateTime CreatedDate { get; set; }
-        [Range(1, double.MaxValue)]
-        public decimal Price { get; set; }
         public int CustomerId { get; set; }
+
+        [NotMapped]
+        public decimal Price
+        {
+            get
+            {
+                if (PurchaseItems is null || PurchaseItems.Count == 0)
+                    return 0;
+
+                return PurchaseItems.Sum(x => x.Amount * x.Price);
+            }
+        }
 
         [NotMapped]
         public decimal? DiscountedPrice
