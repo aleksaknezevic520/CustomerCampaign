@@ -4,7 +4,7 @@
     {
         public int PurchaseId { get; set; }
         public DateTime PurchaseDate { get; set; }
-        public decimal PurchaseoriginalTotalPrice { get; set; }
+        public decimal PurchaseOriginalTotalPrice { get; set; }
         public decimal? PurchaseDiscount { get; set; }
         public decimal? PurchaseDiscountedTotalPrice { get; set; }
         public string CustomerName { get; set; }

@@ -34,7 +34,7 @@ namespace CustomerCampaign.SOAPConsumer.Factories
                 }
 
                 var response = await _reportClient.ReadCSVPurchasesReportAsync(bytes);
-                return new JsonResult(response);
+                return new JsonResult(response.Body.ReadCSVPurchasesReportResult);
 
             }
             catch (Exception)

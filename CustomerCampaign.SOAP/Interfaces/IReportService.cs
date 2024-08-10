@@ -10,6 +10,6 @@ namespace CustomerCampaign.SOAP.Interfaces
         Task<WritePurchasesReportRs> WriteCSVPurchasesReportAsync();
 
         [OperationContract]
-        Task<ReadPurchasesReportRs> ReadCSVPurchasesReportAsync(Stream file);
+        Task<ReadPurchasesReportRs> ReadCSVPurchasesReportAsync(byte[] file);
     }
 }

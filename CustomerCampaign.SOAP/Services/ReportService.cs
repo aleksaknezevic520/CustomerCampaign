@@ -7,6 +7,7 @@ using CustomerCampaign.SOAP.Interfaces;
 using CustomerCampaign.SOAP.Models.Responses;
 using System.Diagnostics;
 using System.Globalization;
+using System.Text;
 
 namespace CustomerCampaign.SOAP.Services
 {
@@ -26,8 +27,13 @@ namespace CustomerCampaign.SOAP.Services
                 var purchaseItems = await _purchaseRepository.GetPurchaseItemsAsync();
                 var purchaseItemsForReport = ObjectMapper.MapPurchases(purchaseItems);
 
-                var filePath = Path.Combine(Constants.CSV_Write_Destination_Folder, 
-                    Constants.CSV_Write_FileName + $"_{DateTime.Now}");
+                var filePath = Path.Combine(
+                    Constants.CSV_Destination_Folder,
+                    string.Concat(
+                        Constants.CSV_File_Name,
+                        "_",
+                        DateTime.Now.ToString(Constants.CSV_File_Date_Sufix_Format),
+                        Constants.CSV_File_Extension));
 
                 Debug.WriteLine("**********************************");
                 Debug.WriteLine("CSV FILE LOCATION:");
@@ -48,13 +54,12 @@ namespace CustomerCampaign.SOAP.Services
             }
         }
 
-        public async Task<ReadPurchasesReportRs> ReadCSVPurchasesReportAsync(Stream file)
+        public async Task<ReadPurchasesReportRs> ReadCSVPurchasesReportAsync(byte[] file)
         {
             await Task.Yield();
-
             try
             {
-                var reader = new StreamReader(file);
+                var reader = new StreamReader(new MemoryStream(file), Encoding.UTF8);
                 var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
                 var records = csv.GetRecords<PurchaseItem>().ToList();
 
@@ -63,7 +68,10 @@ namespace CustomerCampaign.SOAP.Services
                 csv.Dispose();
 
                 var response = new ReadPurchasesReportRs(null);
-                response.PurchaseItems = records;
+                response.PurchaseItems = records
+                    .OrderBy(x => x.PurchaseId)
+                    .ThenBy(x => x.PurchaseItemId)
+                    .ToList();
 
                 return response;
             }

@@ -105,7 +105,7 @@ namespace ReportService
         
         private decimal PurchaseItemUnitPriceField;
         
-        private decimal PurchaseoriginalTotalPriceField;
+        private decimal PurchaseOriginalTotalPriceField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string CustomerName
@@ -225,15 +225,15 @@ namespace ReportService
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal PurchaseoriginalTotalPrice
+        public decimal PurchaseOriginalTotalPrice
         {
             get
             {
-                return this.PurchaseoriginalTotalPriceField;
+                return this.PurchaseOriginalTotalPriceField;
             }
             set
             {
-                this.PurchaseoriginalTotalPriceField = value;
+                this.PurchaseOriginalTotalPriceField = value;
             }
         }
     }
@@ -278,15 +278,15 @@ namespace ReportService
     {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public byte[] StreamBody;
+        public byte[] file;
         
         public ReadCSVPurchasesReportRequestBody()
         {
         }
         
-        public ReadCSVPurchasesReportRequestBody(byte[] StreamBody)
+        public ReadCSVPurchasesReportRequestBody(byte[] file)
         {
-            this.StreamBody = StreamBody;
+            this.file = file;
         }
     }
     
@@ -391,11 +391,11 @@ namespace ReportService
             return base.Channel.ReadCSVPurchasesReportAsync(request);
         }
         
-        public System.Threading.Tasks.Task<ReportService.ReadCSVPurchasesReportResponse> ReadCSVPurchasesReportAsync(byte[] StreamBody)
+        public System.Threading.Tasks.Task<ReportService.ReadCSVPurchasesReportResponse> ReadCSVPurchasesReportAsync(byte[] file)
         {
             ReportService.ReadCSVPurchasesReportRequest inValue = new ReportService.ReadCSVPurchasesReportRequest();
             inValue.Body = new ReportService.ReadCSVPurchasesReportRequestBody();
-            inValue.Body.StreamBody = StreamBody;
+            inValue.Body.file = file;
             return ((ReportService.IReportService)(this)).ReadCSVPurchasesReportAsync(inValue);
         }
         

@@ -45,7 +45,7 @@ namespace CustomerCampaign.SOAP.Helpers
             purchaseItems.Select(x => new PurchaseItemCommon
             {
                 PurchaseId = x.PurchaseId,
-                PurchaseoriginalTotalPrice = x.Purchase.Price,
+                PurchaseOriginalTotalPrice = x.Purchase.Price,
                 PurchaseDiscount = x.Purchase.Customer.Reward?.DiscountPercent,
                 PurchaseDiscountedTotalPrice = x.Purchase.DiscountedPrice,
                 PurchaseDate = x.Purchase.CreatedDate,
