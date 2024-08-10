@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomerCampaign.SOAP.Migrations
 {
     [DbContext(typeof(CustomerCampaignDbContext))]
-    [Migration("20240809201803_UpdatedUniqueConstraints")]
-    partial class UpdatedUniqueConstraints
+    [Migration("20240810102121_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,6 +21,9 @@ namespace CustomerCampaign.SOAP.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.7")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -39,11 +42,14 @@ namespace CustomerCampaign.SOAP.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<decimal?>("DiscountedPrice")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("RewardAgentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RewardCustomerId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("RewardId")
                         .HasColumnType("int");
@@ -52,18 +58,18 @@ namespace CustomerCampaign.SOAP.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("RewardId");
+                    b.HasIndex("RewardAgentId", "RewardCustomerId");
 
-                    b.ToTable("Purchase");
+                    b.ToTable("Purchases");
                 });
 
             modelBuilder.Entity("CustomerCampaign.Data.Models.PurchaseItem", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<int>("PurchaseId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Amount")
                         .HasColumnType("int");
@@ -75,14 +81,11 @@ namespace CustomerCampaign.SOAP.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("PurchaseId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
+                    b.HasKey("Id", "PurchaseId");
 
                     b.HasIndex("PurchaseId");
 
-                    b.ToTable("PurchaseItem");
+                    b.ToTable("PurchaseItems");
                 });
 
             modelBuilder.Entity("CustomerCampaign.Repositories.Models.Address", b =>
@@ -184,25 +187,19 @@ namespace CustomerCampaign.SOAP.Migrations
 
             modelBuilder.Entity("CustomerCampaign.Repositories.Models.Reward", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("AgentId")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AgentId")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("DiscountPercent")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("Id");
+                    b.HasKey("AgentId", "CustomerId");
 
                     b.HasIndex("CustomerId")
                         .IsUnique();
@@ -223,7 +220,7 @@ namespace CustomerCampaign.SOAP.Migrations
 
                     b.HasOne("CustomerCampaign.Repositories.Models.Reward", "Reward")
                         .WithMany()
-                        .HasForeignKey("RewardId");
+                        .HasForeignKey("RewardAgentId", "RewardCustomerId");
 
                     b.Navigation("Customer");
 
@@ -232,9 +229,13 @@ namespace CustomerCampaign.SOAP.Migrations
 
             modelBuilder.Entity("CustomerCampaign.Data.Models.PurchaseItem", b =>
                 {
-                    b.HasOne("CustomerCampaign.Data.Models.Purchase", null)
+                    b.HasOne("CustomerCampaign.Data.Models.Purchase", "Purchase")
                         .WithMany("PurchaseItems")
-                        .HasForeignKey("PurchaseId");
+                        .HasForeignKey("PurchaseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Purchase");
                 });
 
             modelBuilder.Entity("CustomerCampaign.Repositories.Models.Customer", b =>

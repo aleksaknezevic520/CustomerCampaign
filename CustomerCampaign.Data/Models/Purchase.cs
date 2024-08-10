@@ -10,7 +10,6 @@ namespace CustomerCampaign.Data.Models
         public DateTime CreatedDate { get; set; }
         [Range(1, double.MaxValue)]
         public decimal Price { get; set; }
-        public int? RewardId { get; set; }
         public int CustomerId { get; set; }
 
         [NotMapped]
@@ -18,15 +17,14 @@ namespace CustomerCampaign.Data.Models
         {
             get
             {
-                if (Reward is null)
+                if (Customer?.Reward is null)
                     return Price;
 
-                return Price * (100 - Reward.DiscountPercent);
+                return Price * (100 - Customer.Reward.DiscountPercent);
             }
         }
 
         public virtual Customer Customer { get; set; }
-        public virtual Reward Reward { get; set; }
         public virtual ICollection<PurchaseItem> PurchaseItems { get; set; }
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomerCampaign.SOAP.Migrations
 {
     [DbContext(typeof(CustomerCampaignDbContext))]
-    [Migration("20240810101523_AddedPurchase")]
-    partial class AddedPurchase
+    [Migration("20240810103804_RemovedRewardReferenceFromPurchase")]
+    partial class RemovedRewardReferenceFromPurchase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,20 +45,9 @@ namespace CustomerCampaign.SOAP.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("RewardAgentId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("RewardCustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("RewardId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
-
-                    b.HasIndex("RewardAgentId", "RewardCustomerId");
 
                     b.ToTable("Purchases");
                 });
@@ -218,13 +207,7 @@ namespace CustomerCampaign.SOAP.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CustomerCampaign.Repositories.Models.Reward", "Reward")
-                        .WithMany()
-                        .HasForeignKey("RewardAgentId", "RewardCustomerId");
-
                     b.Navigation("Customer");
-
-                    b.Navigation("Reward");
                 });
 
             modelBuilder.Entity("CustomerCampaign.Data.Models.PurchaseItem", b =>
