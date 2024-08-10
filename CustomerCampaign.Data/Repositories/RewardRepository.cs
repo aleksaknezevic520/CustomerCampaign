@@ -13,7 +13,7 @@ namespace CustomerCampaign.Data.Repositories
 
         public async Task<Reward> GetRewardByIdAsync(int agentId, int customerId)
         {
-            return await DataContext.Rewards.FindAsync(new { agentId, customerId });
+            return await DataContext.Rewards.FindAsync(agentId, customerId);                ;
         }
 
         public async Task<List<Reward>> GetRewardsAsync()

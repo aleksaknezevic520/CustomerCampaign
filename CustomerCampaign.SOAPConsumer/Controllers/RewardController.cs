@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CustomerCampaign.SOAPConsumer.Factories;
+using Microsoft.AspNetCore.Mvc;
 using RewardService;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -11,33 +11,45 @@ namespace CustomerCampaign.SOAPConsumer.Controllers
     [ApiController]
     public class RewardController : ControllerBase
     {
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly RewardFactory _rewardFactory;
+
+        public RewardController(RewardFactory rewardFactory)
         {
-            return new string[] { "value1", "value2" };
+            _rewardFactory = rewardFactory;
         }
 
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+        [HttpGet]
+        [Route("Get")]
+        public async Task<JsonResult> Get(int agentId, int customerId) => 
+            await _rewardFactory.GetRewardById(agentId, customerId);
+
+        [HttpGet]
+        [Route("GetAll")]
+        public async Task<JsonResult> Get() => await _rewardFactory.GetRewards();
+
+        [HttpGet]
+        [Route("GetAllForAgent")]
+        public async Task<JsonResult> GetRewardsForAgent(int agentId) => 
+            await _rewardFactory.GetRewardsForAgent(agentId);
+
+        [HttpGet]
+        [Route("GetAllForCustomer")]
+        public async Task<JsonResult> GetRewardsForCustomer(int customerId) => 
+            await _rewardFactory.GetRewardsForCustomer(customerId);
 
         [HttpPost]
-        public async Task<AddRewardRs> AddRewardForCustomer([FromBody] AddRewardRq request)
-        {
-            var service = new RewardServiceClient(RewardServiceClient.EndpointConfiguration.BasicHttpBinding_IRewardService);
-            return await service.AddRewardAsync(request);
-        }
+        [Route("Add")]
+        public async Task<JsonResult> Add([FromBody] AddRewardRq request) => 
+            await _rewardFactory.AddReward(request);
 
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        [HttpPut]
+        [Route("Update")]
+        public async Task<JsonResult> Update([FromBody] UpdateRewardRq request) => 
+            await _rewardFactory.UpdateReward(request);
 
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        [HttpDelete]
+        [Route("Delete")]
+        public async Task<JsonResult> Delete(int agentId, int customerId) => 
+            await _rewardFactory.DeleteReward(agentId, customerId);
     }
 }

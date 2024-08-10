@@ -14,7 +14,8 @@ builder.Services.AddSoapCore();
 
 // Add db connection
 builder.Services.AddDbContext<CustomerCampaignDbContext>(options =>
-    options.UseSqlServer(DatabaseSettings.Connection_String,
+    options.UseLazyLoadingProxies()
+    .UseSqlServer(DatabaseSettings.Connection_String,
         b => b.MigrationsAssembly(DatabaseSettings.Migrations_Assembly)));
 
 // Services

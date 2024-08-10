@@ -29,7 +29,8 @@ namespace CustomerCampaign.SOAP.Services
                 var reward = await _rewardRepository.GetRewardByIdAsync(agentId, customerId);
 
                 var response = new GetRewardRs(null);
-                response.Reward = RewardHelper.MapReward(reward);
+                if(reward is not null)
+                    response.Reward = RewardHelper.MapReward(reward);
 
                 return response;
             }
@@ -109,7 +110,7 @@ namespace CustomerCampaign.SOAP.Services
             if (customer is not { IsLoyal: true })
                 return new AddRewardRs("Loyalty customer not found");
 
-            var reward = _rewardRepository.GetRewardByIdAsync(rq.AgentId, rq.CustomerId);
+            var reward = await _rewardRepository.GetRewardByIdAsync(rq.AgentId, rq.CustomerId);
             if (reward is not null)
                 return new AddRewardRs("Reward already exists for the customer");
 
