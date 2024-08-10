@@ -59,13 +59,15 @@ namespace CustomerCampaign.SOAP.Services
             await Task.Yield();
             try
             {
-                var reader = new StreamReader(new MemoryStream(file), Encoding.UTF8);
-                var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
-                var records = csv.GetRecords<PurchaseItem>().ToList();
+                var records = new List<PurchaseItem>();
 
-                reader.Close();
-                reader.Dispose();
-                csv.Dispose();
+                using (var reader = new StreamReader(new MemoryStream(file), Encoding.UTF8))
+                {
+                    using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                    {
+                            records = csv.GetRecords<PurchaseItem>().ToList();
+                    }
+                }
 
                 var response = new ReadPurchasesReportRs(null);
                 response.PurchaseItems = records
