@@ -1,9 +1,10 @@
 ﻿using CustomerCampaign.Infrastructure.Models.Common;
+using System.Runtime.Serialization;
 
 namespace CustomerCampaign.SOAP.Models.Requests
 {
-    public class SyncCustomersRq
+    [DataContract]
+    public class SyncCustomersRq : RequestBase
     {
-        public List<Customer> Customers { get; set; }
     }
 }

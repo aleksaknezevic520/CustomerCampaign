@@ -4,14 +4,10 @@ using System.Runtime.Serialization;
 namespace CustomerCampaign.SOAP.Models.Requests
 {
     [DataContract]
-    public class DeleteRewardRq : RequestBase
+    public class RequestBase
     {
-        [Required]
         [DataMember]
-        public int AgentId { get; set; }
-
         [Required]
-        [DataMember]
-        public int CustomerId { get; set; }
+        public string AuthToken { get; set; }
     }
 }

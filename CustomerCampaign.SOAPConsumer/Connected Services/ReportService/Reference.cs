@@ -14,6 +14,59 @@ namespace ReportService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RequestBase", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Requests")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ReportService.ReadPurchasesReportRq))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ReportService.WritePurchasesReportRq))]
+    public partial class RequestBase : object
+    {
+        
+        private string AuthTokenField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AuthToken
+        {
+            get
+            {
+                return this.AuthTokenField;
+            }
+            set
+            {
+                this.AuthTokenField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ReadPurchasesReportRq", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Requests")]
+    public partial class ReadPurchasesReportRq : ReportService.RequestBase
+    {
+        
+        private byte[] CSVFileField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public byte[] CSVFile
+        {
+            get
+            {
+                return this.CSVFileField;
+            }
+            set
+            {
+                this.CSVFileField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="WritePurchasesReportRq", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Requests")]
+    public partial class WritePurchasesReportRq : ReportService.RequestBase
+    {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ResponseBase", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Responses")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ReportService.ReadPurchasesReportRs))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ReportService.WritePurchasesReportRs))]
@@ -244,90 +297,10 @@ namespace ReportService
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/WriteCSVPurchasesReport", ReplyAction="http://tempuri.org/IReportService/WriteCSVPurchasesReportResponse")]
-        System.Threading.Tasks.Task<ReportService.WritePurchasesReportRs> WriteCSVPurchasesReportAsync();
+        System.Threading.Tasks.Task<ReportService.WritePurchasesReportRs> WriteCSVPurchasesReportAsync(ReportService.WritePurchasesReportRq reqquest);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IReportService/ReadCSVPurchasesReport", ReplyAction="http://tempuri.org/IReportService/ReadCSVPurchasesReportResponse")]
-        System.Threading.Tasks.Task<ReportService.ReadCSVPurchasesReportResponse> ReadCSVPurchasesReportAsync(ReportService.ReadCSVPurchasesReportRequest request);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class ReadCSVPurchasesReportRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="ReadCSVPurchasesReport", Namespace="http://tempuri.org/", Order=0)]
-        public ReportService.ReadCSVPurchasesReportRequestBody Body;
-        
-        public ReadCSVPurchasesReportRequest()
-        {
-        }
-        
-        public ReadCSVPurchasesReportRequest(ReportService.ReadCSVPurchasesReportRequestBody Body)
-        {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class ReadCSVPurchasesReportRequestBody
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public byte[] file;
-        
-        public ReadCSVPurchasesReportRequestBody()
-        {
-        }
-        
-        public ReadCSVPurchasesReportRequestBody(byte[] file)
-        {
-            this.file = file;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class ReadCSVPurchasesReportResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="ReadCSVPurchasesReportResponse", Namespace="http://tempuri.org/", Order=0)]
-        public ReportService.ReadCSVPurchasesReportResponseBody Body;
-        
-        public ReadCSVPurchasesReportResponse()
-        {
-        }
-        
-        public ReadCSVPurchasesReportResponse(ReportService.ReadCSVPurchasesReportResponseBody Body)
-        {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class ReadCSVPurchasesReportResponseBody
-    {
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
-        public ReportService.ReadPurchasesReportRs ReadCSVPurchasesReportResult;
-        
-        public ReadCSVPurchasesReportResponseBody()
-        {
-        }
-        
-        public ReadCSVPurchasesReportResponseBody(ReportService.ReadPurchasesReportRs ReadCSVPurchasesReportResult)
-        {
-            this.ReadCSVPurchasesReportResult = ReadCSVPurchasesReportResult;
-        }
+        System.Threading.Tasks.Task<ReportService.ReadPurchasesReportRs> ReadCSVPurchasesReportAsync(ReportService.ReadPurchasesReportRq request);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
@@ -380,23 +353,14 @@ namespace ReportService
         {
         }
         
-        public System.Threading.Tasks.Task<ReportService.WritePurchasesReportRs> WriteCSVPurchasesReportAsync()
+        public System.Threading.Tasks.Task<ReportService.WritePurchasesReportRs> WriteCSVPurchasesReportAsync(ReportService.WritePurchasesReportRq reqquest)
         {
-            return base.Channel.WriteCSVPurchasesReportAsync();
+            return base.Channel.WriteCSVPurchasesReportAsync(reqquest);
         }
         
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<ReportService.ReadCSVPurchasesReportResponse> ReportService.IReportService.ReadCSVPurchasesReportAsync(ReportService.ReadCSVPurchasesReportRequest request)
+        public System.Threading.Tasks.Task<ReportService.ReadPurchasesReportRs> ReadCSVPurchasesReportAsync(ReportService.ReadPurchasesReportRq request)
         {
             return base.Channel.ReadCSVPurchasesReportAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<ReportService.ReadCSVPurchasesReportResponse> ReadCSVPurchasesReportAsync(byte[] file)
-        {
-            ReportService.ReadCSVPurchasesReportRequest inValue = new ReportService.ReadCSVPurchasesReportRequest();
-            inValue.Body = new ReportService.ReadCSVPurchasesReportRequestBody();
-            inValue.Body.file = file;
-            return ((ReportService.IReportService)(this)).ReadCSVPurchasesReportAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

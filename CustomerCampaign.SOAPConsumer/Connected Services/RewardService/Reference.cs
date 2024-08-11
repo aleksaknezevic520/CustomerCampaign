@@ -14,6 +14,264 @@ namespace RewardService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RequestBase", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Requests")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(RewardService.GetRewardsRq))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(RewardService.GetRewardsForAgentRq))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(RewardService.GetRewardForCustomerRq))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(RewardService.AddRewardRq))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(RewardService.UpdateRewardRq))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(RewardService.DeleteRewardRq))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(RewardService.GetRewardByIdRq))]
+    public partial class RequestBase : object
+    {
+        
+        private string AuthTokenField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AuthToken
+        {
+            get
+            {
+                return this.AuthTokenField;
+            }
+            set
+            {
+                this.AuthTokenField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetRewardsRq", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Requests")]
+    public partial class GetRewardsRq : RewardService.RequestBase
+    {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetRewardsForAgentRq", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Requests")]
+    public partial class GetRewardsForAgentRq : RewardService.RequestBase
+    {
+        
+        private int AgentIdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int AgentId
+        {
+            get
+            {
+                return this.AgentIdField;
+            }
+            set
+            {
+                this.AgentIdField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetRewardForCustomerRq", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Requests")]
+    public partial class GetRewardForCustomerRq : RewardService.RequestBase
+    {
+        
+        private int CustomerIdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CustomerId
+        {
+            get
+            {
+                return this.CustomerIdField;
+            }
+            set
+            {
+                this.CustomerIdField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AddRewardRq", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Requests")]
+    public partial class AddRewardRq : RewardService.RequestBase
+    {
+        
+        private int AgentIdField;
+        
+        private int CustomerIdField;
+        
+        private decimal DiscountPercentField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int AgentId
+        {
+            get
+            {
+                return this.AgentIdField;
+            }
+            set
+            {
+                this.AgentIdField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CustomerId
+        {
+            get
+            {
+                return this.CustomerIdField;
+            }
+            set
+            {
+                this.CustomerIdField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal DiscountPercent
+        {
+            get
+            {
+                return this.DiscountPercentField;
+            }
+            set
+            {
+                this.DiscountPercentField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="UpdateRewardRq", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Requests")]
+    public partial class UpdateRewardRq : RewardService.RequestBase
+    {
+        
+        private int AgentIdField;
+        
+        private int CustomerIdField;
+        
+        private decimal DiscountPercentField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int AgentId
+        {
+            get
+            {
+                return this.AgentIdField;
+            }
+            set
+            {
+                this.AgentIdField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CustomerId
+        {
+            get
+            {
+                return this.CustomerIdField;
+            }
+            set
+            {
+                this.CustomerIdField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal DiscountPercent
+        {
+            get
+            {
+                return this.DiscountPercentField;
+            }
+            set
+            {
+                this.DiscountPercentField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DeleteRewardRq", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Requests")]
+    public partial class DeleteRewardRq : RewardService.RequestBase
+    {
+        
+        private int AgentIdField;
+        
+        private int CustomerIdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int AgentId
+        {
+            get
+            {
+                return this.AgentIdField;
+            }
+            set
+            {
+                this.AgentIdField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CustomerId
+        {
+            get
+            {
+                return this.CustomerIdField;
+            }
+            set
+            {
+                this.CustomerIdField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GetRewardByIdRq", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Requests")]
+    public partial class GetRewardByIdRq : RewardService.RequestBase
+    {
+        
+        private int AgentIdField;
+        
+        private int CustomerIdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int AgentId
+        {
+            get
+            {
+                return this.AgentIdField;
+            }
+            set
+            {
+                this.AgentIdField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CustomerId
+        {
+            get
+            {
+                return this.CustomerIdField;
+            }
+            set
+            {
+                this.CustomerIdField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ResponseBase", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Responses")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(RewardService.GetRewardsRs))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(RewardService.AddRewardRs))]
@@ -232,163 +490,22 @@ namespace RewardService
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AddRewardRq", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Requests")]
-    public partial class AddRewardRq : object
-    {
-        
-        private int AgentIdField;
-        
-        private int CustomerIdField;
-        
-        private decimal DiscountPercentField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int AgentId
-        {
-            get
-            {
-                return this.AgentIdField;
-            }
-            set
-            {
-                this.AgentIdField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int CustomerId
-        {
-            get
-            {
-                return this.CustomerIdField;
-            }
-            set
-            {
-                this.CustomerIdField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal DiscountPercent
-        {
-            get
-            {
-                return this.DiscountPercentField;
-            }
-            set
-            {
-                this.DiscountPercentField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="UpdateRewardRq", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Requests")]
-    public partial class UpdateRewardRq : object
-    {
-        
-        private int AgentIdField;
-        
-        private int CustomerIdField;
-        
-        private decimal DiscountPercentField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int AgentId
-        {
-            get
-            {
-                return this.AgentIdField;
-            }
-            set
-            {
-                this.AgentIdField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int CustomerId
-        {
-            get
-            {
-                return this.CustomerIdField;
-            }
-            set
-            {
-                this.CustomerIdField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal DiscountPercent
-        {
-            get
-            {
-                return this.DiscountPercentField;
-            }
-            set
-            {
-                this.DiscountPercentField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="DeleteRewardRq", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Requests")]
-    public partial class DeleteRewardRq : object
-    {
-        
-        private int AgentIdField;
-        
-        private int CustomerIdField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int AgentId
-        {
-            get
-            {
-                return this.AgentIdField;
-            }
-            set
-            {
-                this.AgentIdField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int CustomerId
-        {
-            get
-            {
-                return this.CustomerIdField;
-            }
-            set
-            {
-                this.CustomerIdField = value;
-            }
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="RewardService.IRewardService")]
     public interface IRewardService
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRewardService/GetRewardById", ReplyAction="http://tempuri.org/IRewardService/GetRewardByIdResponse")]
-        System.Threading.Tasks.Task<RewardService.GetRewardRs> GetRewardByIdAsync(int agentId, int customerId);
+        System.Threading.Tasks.Task<RewardService.GetRewardRs> GetRewardByIdAsync(RewardService.GetRewardByIdRq rq);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRewardService/GetRewards", ReplyAction="http://tempuri.org/IRewardService/GetRewardsResponse")]
-        System.Threading.Tasks.Task<RewardService.GetRewardsRs> GetRewardsAsync();
+        System.Threading.Tasks.Task<RewardService.GetRewardsRs> GetRewardsAsync(RewardService.GetRewardsRq rq);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRewardService/GetRewardsForAgent", ReplyAction="http://tempuri.org/IRewardService/GetRewardsForAgentResponse")]
-        System.Threading.Tasks.Task<RewardService.GetRewardsRs> GetRewardsForAgentAsync(int AgentId);
+        System.Threading.Tasks.Task<RewardService.GetRewardsRs> GetRewardsForAgentAsync(RewardService.GetRewardsForAgentRq rq);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRewardService/GetRewardForCustomer", ReplyAction="http://tempuri.org/IRewardService/GetRewardForCustomerResponse")]
-        System.Threading.Tasks.Task<RewardService.GetRewardRs> GetRewardForCustomerAsync(int customerId);
+        System.Threading.Tasks.Task<RewardService.GetRewardRs> GetRewardForCustomerAsync(RewardService.GetRewardForCustomerRq rq);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRewardService/AddReward", ReplyAction="http://tempuri.org/IRewardService/AddRewardResponse")]
         System.Threading.Tasks.Task<RewardService.AddRewardRs> AddRewardAsync(RewardService.AddRewardRq rq);
@@ -450,24 +567,24 @@ namespace RewardService
         {
         }
         
-        public System.Threading.Tasks.Task<RewardService.GetRewardRs> GetRewardByIdAsync(int agentId, int customerId)
+        public System.Threading.Tasks.Task<RewardService.GetRewardRs> GetRewardByIdAsync(RewardService.GetRewardByIdRq rq)
         {
-            return base.Channel.GetRewardByIdAsync(agentId, customerId);
+            return base.Channel.GetRewardByIdAsync(rq);
         }
         
-        public System.Threading.Tasks.Task<RewardService.GetRewardsRs> GetRewardsAsync()
+        public System.Threading.Tasks.Task<RewardService.GetRewardsRs> GetRewardsAsync(RewardService.GetRewardsRq rq)
         {
-            return base.Channel.GetRewardsAsync();
+            return base.Channel.GetRewardsAsync(rq);
         }
         
-        public System.Threading.Tasks.Task<RewardService.GetRewardsRs> GetRewardsForAgentAsync(int AgentId)
+        public System.Threading.Tasks.Task<RewardService.GetRewardsRs> GetRewardsForAgentAsync(RewardService.GetRewardsForAgentRq rq)
         {
-            return base.Channel.GetRewardsForAgentAsync(AgentId);
+            return base.Channel.GetRewardsForAgentAsync(rq);
         }
         
-        public System.Threading.Tasks.Task<RewardService.GetRewardRs> GetRewardForCustomerAsync(int customerId)
+        public System.Threading.Tasks.Task<RewardService.GetRewardRs> GetRewardForCustomerAsync(RewardService.GetRewardForCustomerRq rq)
         {
-            return base.Channel.GetRewardForCustomerAsync(customerId);
+            return base.Channel.GetRewardForCustomerAsync(rq);
         }
         
         public System.Threading.Tasks.Task<RewardService.AddRewardRs> AddRewardAsync(RewardService.AddRewardRq rq)

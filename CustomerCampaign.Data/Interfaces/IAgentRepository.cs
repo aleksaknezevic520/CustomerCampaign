@@ -5,7 +5,7 @@ namespace CustomerCampaign.Data.Interfaces
     public interface IAgentRepository : IRepositoryBase
     {
         Agent GetAgentById(int id);
-        Task<Agent> GetAgentByEmail(string email);
+        Task<Agent> GetAgentByEmailAsync(string email);
         void CreateAgent(Agent agent);
     }
 }

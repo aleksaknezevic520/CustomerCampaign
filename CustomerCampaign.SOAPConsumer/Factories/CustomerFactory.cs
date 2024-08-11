@@ -2,10 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RewardService;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
-using CustomerServiceAddress = CustomerService.Address;
 
 namespace CustomerCampaign.SOAPConsumer.Factories
 {
@@ -14,15 +11,15 @@ namespace CustomerCampaign.SOAPConsumer.Factories
         private readonly RewardServiceClient _rewardService;
         private readonly CustomerServiceClient _customerService;
 
-        public CustomerFactory()
+        public CustomerFactory(RewardServiceClient rewardService, CustomerServiceClient customerService)
         {
-            _rewardService = new RewardServiceClient(RewardServiceClient.EndpointConfiguration.BasicHttpBinding_IRewardService);
-            _customerService = new CustomerServiceClient(CustomerServiceClient.EndpointConfiguration.BasicHttpBinding_ICustomerService);
+            _rewardService = rewardService;
+            _customerService = customerService;
         }
 
-        public async Task<JsonResult> SyncCustomers()
+        public async Task<JsonResult> SyncCustomers(SyncCustomersRq rq)
         {
-            var response = await _customerService.SyncCustomersAsync();
+            var response = await _customerService.SyncCustomersAsync(rq);
             return new JsonResult(response);
         }
 

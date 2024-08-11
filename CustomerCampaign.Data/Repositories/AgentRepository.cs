@@ -15,7 +15,7 @@ namespace CustomerCampaign.Data.Repositories
             return DataContext.Agents.Find(id);
         }
 
-        public async Task<Agent> GetAgentByEmail(string email)
+        public async Task<Agent> GetAgentByEmailAsync(string email)
         {
             return await DataContext.Agents.SingleOrDefaultAsync(x => x.Email == email);
         }

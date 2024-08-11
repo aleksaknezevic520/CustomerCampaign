@@ -4,6 +4,7 @@ using CustomerCampaign.Infrastructure;
 using CustomerCampaign.Infrastructure.Models.Common;
 using CustomerCampaign.SOAP.Helpers;
 using CustomerCampaign.SOAP.Interfaces;
+using CustomerCampaign.SOAP.Models.Requests;
 using CustomerCampaign.SOAP.Models.Responses;
 using System.Diagnostics;
 using System.Globalization;
@@ -20,10 +21,15 @@ namespace CustomerCampaign.SOAP.Services
             _purchaseRepository = purchaseRepository;
         }
 
-        public async Task<WritePurchasesReportRs> WriteCSVPurchasesReportAsync()
+        public async Task<WritePurchasesReportRs> WriteCSVPurchasesReportAsync(WritePurchasesReportRq request)
         {
             try
             {
+                var validationResult = AuthHelper.ValidateToken(request.AuthToken);
+
+                if(validationResult.Invalid)
+                    return new WritePurchasesReportRs(validationResult.Error);
+
                 var purchaseItems = await _purchaseRepository.GetPurchaseItemsAsync();
                 var purchaseItemsForReport = ObjectMapper.MapPurchases(purchaseItems);
 
@@ -54,14 +60,20 @@ namespace CustomerCampaign.SOAP.Services
             }
         }
 
-        public async Task<ReadPurchasesReportRs> ReadCSVPurchasesReportAsync(byte[] file)
+        public async Task<ReadPurchasesReportRs> ReadCSVPurchasesReportAsync(ReadPurchasesReportRq request)
         {
             await Task.Yield();
+
+            var validationResult = AuthHelper.ValidateToken(request.AuthToken);
+
+            if (validationResult.Invalid)
+                return new ReadPurchasesReportRs(validationResult.Error);
+
             try
             {
                 var records = new List<PurchaseItem>();
 
-                using (var reader = new StreamReader(new MemoryStream(file), Encoding.UTF8))
+                using (var reader = new StreamReader(new MemoryStream(request.CSVFile), Encoding.UTF8))
                 {
                     using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
                     {

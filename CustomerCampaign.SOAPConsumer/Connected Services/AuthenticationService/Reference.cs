@@ -7,43 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AgentService
+namespace AuthenticationService
 {
     using System.Runtime.Serialization;
     
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="RequestBase", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Requests")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(AgentService.CreateAgentRq))]
-    public partial class RequestBase : object
-    {
-        
-        private string AuthTokenField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AuthToken
-        {
-            get
-            {
-                return this.AuthTokenField;
-            }
-            set
-            {
-                this.AuthTokenField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CreateAgentRq", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Requests")]
-    public partial class CreateAgentRq : AgentService.RequestBase
+    [System.Runtime.Serialization.DataContractAttribute(Name="AuthenticateRq", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Requests")]
+    public partial class AuthenticateRq : object
     {
         
         private string EmailField;
-        
-        private string NameField;
         
         private string PasswordField;
         
@@ -57,19 +32,6 @@ namespace AgentService
             set
             {
                 this.EmailField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this.NameField;
-            }
-            set
-            {
-                this.NameField = value;
             }
         }
         
@@ -90,7 +52,7 @@ namespace AgentService
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ResponseBase", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Responses")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(AgentService.CreateAgentRs))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(AuthenticationService.AuthenticateRs))]
     public partial class ResponseBase : object
     {
         
@@ -127,28 +89,43 @@ namespace AgentService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CreateAgentRs", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Responses")]
-    public partial class CreateAgentRs : AgentService.ResponseBase
-    {
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="AgentService.IAgentService")]
-    public interface IAgentService
+    [System.Runtime.Serialization.DataContractAttribute(Name="AuthenticateRs", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Responses")]
+    public partial class AuthenticateRs : AuthenticationService.ResponseBase
     {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAgentService/CreateAgent", ReplyAction="http://tempuri.org/IAgentService/CreateAgentResponse")]
-        System.Threading.Tasks.Task<AgentService.CreateAgentRs> CreateAgentAsync(AgentService.CreateAgentRq request);
+        private string TokenField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Token
+        {
+            get
+            {
+                return this.TokenField;
+            }
+            set
+            {
+                this.TokenField = value;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface IAgentServiceChannel : AgentService.IAgentService, System.ServiceModel.IClientChannel
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="AuthenticationService.IAuthenticationService")]
+    public interface IAuthenticationService
+    {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationService/Authenticate", ReplyAction="http://tempuri.org/IAuthenticationService/AuthenticateResponse")]
+        System.Threading.Tasks.Task<AuthenticationService.AuthenticateRs> AuthenticateAsync(AuthenticationService.AuthenticateRq request);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    public interface IAuthenticationServiceChannel : AuthenticationService.IAuthenticationService, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class AgentServiceClient : System.ServiceModel.ClientBase<AgentService.IAgentService>, AgentService.IAgentService
+    public partial class AuthenticationServiceClient : System.ServiceModel.ClientBase<AuthenticationService.IAuthenticationService>, AuthenticationService.IAuthenticationService
     {
         
         /// <summary>
@@ -158,42 +135,42 @@ namespace AgentService
         /// <param name="clientCredentials">The client credentials</param>
         static partial void ConfigureEndpoint(System.ServiceModel.Description.ServiceEndpoint serviceEndpoint, System.ServiceModel.Description.ClientCredentials clientCredentials);
         
-        public AgentServiceClient() : 
-                base(AgentServiceClient.GetDefaultBinding(), AgentServiceClient.GetDefaultEndpointAddress())
+        public AuthenticationServiceClient() : 
+                base(AuthenticationServiceClient.GetDefaultBinding(), AuthenticationServiceClient.GetDefaultEndpointAddress())
         {
-            this.Endpoint.Name = EndpointConfiguration.BasicHttpBinding_IAgentService.ToString();
+            this.Endpoint.Name = EndpointConfiguration.BasicHttpBinding_IAuthenticationService.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public AgentServiceClient(EndpointConfiguration endpointConfiguration) : 
-                base(AgentServiceClient.GetBindingForEndpoint(endpointConfiguration), AgentServiceClient.GetEndpointAddress(endpointConfiguration))
-        {
-            this.Endpoint.Name = endpointConfiguration.ToString();
-            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
-        }
-        
-        public AgentServiceClient(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
-                base(AgentServiceClient.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
+        public AuthenticationServiceClient(EndpointConfiguration endpointConfiguration) : 
+                base(AuthenticationServiceClient.GetBindingForEndpoint(endpointConfiguration), AuthenticationServiceClient.GetEndpointAddress(endpointConfiguration))
         {
             this.Endpoint.Name = endpointConfiguration.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public AgentServiceClient(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(AgentServiceClient.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        public AuthenticationServiceClient(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
+                base(AuthenticationServiceClient.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
         {
             this.Endpoint.Name = endpointConfiguration.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public AgentServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public AuthenticationServiceClient(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(AuthenticationServiceClient.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        {
+            this.Endpoint.Name = endpointConfiguration.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public AuthenticationServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress)
         {
         }
         
-        public System.Threading.Tasks.Task<AgentService.CreateAgentRs> CreateAgentAsync(AgentService.CreateAgentRq request)
+        public System.Threading.Tasks.Task<AuthenticationService.AuthenticateRs> AuthenticateAsync(AuthenticationService.AuthenticateRq request)
         {
-            return base.Channel.CreateAgentAsync(request);
+            return base.Channel.AuthenticateAsync(request);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -203,7 +180,7 @@ namespace AgentService
         
         private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
         {
-            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IAgentService))
+            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IAuthenticationService))
             {
                 System.ServiceModel.BasicHttpBinding result = new System.ServiceModel.BasicHttpBinding();
                 result.MaxBufferSize = int.MaxValue;
@@ -218,27 +195,27 @@ namespace AgentService
         
         private static System.ServiceModel.EndpointAddress GetEndpointAddress(EndpointConfiguration endpointConfiguration)
         {
-            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IAgentService))
+            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IAuthenticationService))
             {
-                return new System.ServiceModel.EndpointAddress("https://localhost:7030/AgentService.asmx");
+                return new System.ServiceModel.EndpointAddress("https://localhost:7030/AuthenticationService.asmx");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }
         
         private static System.ServiceModel.Channels.Binding GetDefaultBinding()
         {
-            return AgentServiceClient.GetBindingForEndpoint(EndpointConfiguration.BasicHttpBinding_IAgentService);
+            return AuthenticationServiceClient.GetBindingForEndpoint(EndpointConfiguration.BasicHttpBinding_IAuthenticationService);
         }
         
         private static System.ServiceModel.EndpointAddress GetDefaultEndpointAddress()
         {
-            return AgentServiceClient.GetEndpointAddress(EndpointConfiguration.BasicHttpBinding_IAgentService);
+            return AuthenticationServiceClient.GetEndpointAddress(EndpointConfiguration.BasicHttpBinding_IAuthenticationService);
         }
         
         public enum EndpointConfiguration
         {
             
-            BasicHttpBinding_IAgentService,
+            BasicHttpBinding_IAuthenticationService,
         }
     }
 }

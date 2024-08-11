@@ -9,27 +9,14 @@ namespace CustomerCampaign.SOAPConsumer.Factories
     {
         private readonly AgentServiceClient _agentService;
 
-        public AgentFactory()
+        public AgentFactory(AgentServiceClient agentService)
         {
-            _agentService = new AgentServiceClient(AgentServiceClient.EndpointConfiguration.BasicHttpBinding_IAgentService);
+            _agentService = agentService;
         }
 
-        public async Task<JsonResult> CreateAgent(CreateAgent request)
+        public async Task<JsonResult> CreateAgent(CreateAgentRq request)
         {
-            if(request == null)
-                return new JsonResult(new { Success = false, ErrorMessage = "Request is null" });
-
-            if (string.IsNullOrEmpty(request.Email) || string.IsNullOrEmpty(request.Password) 
-                || string.IsNullOrEmpty(request.Name))
-                return new JsonResult(new { Success = false, ErrorMessage = "All fields are required" });
-
-            var response = await _agentService.CreateAgentAsync(new CreateAgentRq
-            {
-                Email = request.Email,
-                Password = request.Password,
-                Name = request.Name
-            });
-
+            var response = await _agentService.CreateAgentAsync(request);
             return new JsonResult(response);
         }
     }

@@ -1,4 +1,5 @@
-﻿using CustomerCampaign.Data.Interfaces;
+﻿using Azure.Core;
+using CustomerCampaign.Data.Interfaces;
 using CustomerCampaign.Infrastructure;
 using CustomerCampaign.Repositories.Models;
 using CustomerCampaign.SOAP.Helpers;
@@ -22,11 +23,18 @@ namespace CustomerCampaign.SOAP.Services
             _agentRepository = agentRepository;
         }
 
-        public async Task<GetRewardRs> GetRewardByIdAsync(int agentId, int customerId)
+        public async Task<GetRewardRs> GetRewardByIdAsync(GetRewardByIdRq rq)
         {
+            var validationResult = AuthHelper.ValidateToken(rq.AuthToken);
+            if (validationResult.Invalid)
+                return new GetRewardRs(validationResult.Error);
+
             try
             {
-                var reward = await _rewardRepository.GetRewardByIdAsync(agentId, customerId);
+                var reward = await _rewardRepository.GetRewardByIdAsync(rq.AgentId, rq.CustomerId);
+
+                if (reward == null)
+                    return new GetRewardRs("Reward does not exist");
 
                 var response = new GetRewardRs(null);
                 if(reward is not null)
@@ -36,12 +44,16 @@ namespace CustomerCampaign.SOAP.Services
             }
             catch (Exception)
             {
-                return new GetRewardRs("Unkown error occurred while getting customer rewards");
+                return new GetRewardRs("Unkown error occurred");
             }
         }
 
-        public async Task<GetRewardsRs> GetRewards()
+        public async Task<GetRewardsRs> GetRewards(GetRewardsRq rq)
         {
+            var validationResult = AuthHelper.ValidateToken(rq.AuthToken);
+            if (validationResult.Invalid)
+                return new GetRewardsRs(validationResult.Error);
+
             try
             {
                 var rewards = await _rewardRepository.GetRewardsAsync();
@@ -57,11 +69,15 @@ namespace CustomerCampaign.SOAP.Services
             }
         }
 
-        public async Task<GetRewardsRs> GetRewardsForAgent(int agentId)
+        public async Task<GetRewardsRs> GetRewardsForAgent(GetRewardsForAgentRq rq)
         {
+            var validationResult = AuthHelper.ValidateToken(rq.AuthToken);
+            if (validationResult.Invalid)
+                return new GetRewardsRs(validationResult.Error);
+
             try
             {
-                var rewards = await _rewardRepository.GetRewardsForAgentAsync(agentId);                
+                var rewards = await _rewardRepository.GetRewardsForAgentAsync(rq.AgentId);                
 
                 var response = new GetRewardsRs(null);
                 response.Rewards = ObjectMapper.MapRewards(rewards);
@@ -74,11 +90,18 @@ namespace CustomerCampaign.SOAP.Services
             }
         }
 
-        public async Task<GetRewardRs> GetRewardForCustomer(int customerId)
+        public async Task<GetRewardRs> GetRewardForCustomer(GetRewardForCustomerRq rq)
         {
+            var validationResult = AuthHelper.ValidateToken(rq.AuthToken);
+            if (validationResult.Invalid)
+                return new GetRewardRs(validationResult.Error);
+
             try
             {
-                var reward = await _rewardRepository.GetRewardForCustomerAsync(customerId);
+                var reward = await _rewardRepository.GetRewardForCustomerAsync(rq.CustomerId);
+
+                if(reward == null)
+                    return new GetRewardRs("Reward does not exist");
 
                 var response = new GetRewardRs(null);
                 response.Reward = ObjectMapper.MapReward(reward);
@@ -87,7 +110,7 @@ namespace CustomerCampaign.SOAP.Services
             }
             catch (Exception)
             {
-                return new GetRewardRs("Unkown error occurred while getting customer rewards for agent");
+                return new GetRewardRs("Unkown error occurred");
             }
         }
 
@@ -95,6 +118,10 @@ namespace CustomerCampaign.SOAP.Services
         {
             if (rq == null)
                 return new AddRewardRs("Request object is null");
+
+            var validationResult = AuthHelper.ValidateToken(rq.AuthToken);
+            if (validationResult.Invalid)
+                return new AddRewardRs(validationResult.Error);
 
             var currentDate = DateTime.Now;
             var agentRewardsOnDay = await _rewardRepository.GetAgentRewardsOnDayAsync(rq.AgentId, currentDate);
@@ -135,6 +162,10 @@ namespace CustomerCampaign.SOAP.Services
 
         public async Task<UpdateRewardRs> UpdateReward(UpdateRewardRq rq)
         {
+            var validationResult = AuthHelper.ValidateToken(rq.AuthToken);
+            if (validationResult.Invalid)
+                return new UpdateRewardRs(validationResult.Error);
+
             var reward = await _rewardRepository.GetRewardByIdAsync(rq.AgentId, rq.CustomerId);
             if (reward is null)
                 return new UpdateRewardRs("Reward not found");
@@ -157,6 +188,10 @@ namespace CustomerCampaign.SOAP.Services
 
         public async Task<DeleteRewardRs> DeleteReward(DeleteRewardRq rq)
         {
+            var validationResult = AuthHelper.ValidateToken(rq.AuthToken);
+            if (validationResult.Invalid)
+                return new DeleteRewardRs(validationResult.Error);
+
             var reward = await _rewardRepository.GetRewardByIdAsync(rq.AgentId, rq.CustomerId);
             if (reward is null)
                 return new DeleteRewardRs("Reward not found");

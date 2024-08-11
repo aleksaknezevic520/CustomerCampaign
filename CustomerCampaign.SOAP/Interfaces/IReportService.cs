@@ -1,4 +1,5 @@
-﻿using CustomerCampaign.SOAP.Models.Responses;
+﻿using CustomerCampaign.SOAP.Models.Requests;
+using CustomerCampaign.SOAP.Models.Responses;
 using System.ServiceModel;
 
 namespace CustomerCampaign.SOAP.Interfaces
@@ -7,9 +8,9 @@ namespace CustomerCampaign.SOAP.Interfaces
     public interface IReportService
     {
         [OperationContract]
-        Task<WritePurchasesReportRs> WriteCSVPurchasesReportAsync();
+        Task<WritePurchasesReportRs> WriteCSVPurchasesReportAsync(WritePurchasesReportRq reqquest);
 
         [OperationContract]
-        Task<ReadPurchasesReportRs> ReadCSVPurchasesReportAsync(byte[] file);
+        Task<ReadPurchasesReportRs> ReadCSVPurchasesReportAsync(ReadPurchasesReportRq request);
     }
 }

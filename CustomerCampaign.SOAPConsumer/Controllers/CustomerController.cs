@@ -20,12 +20,12 @@ namespace CustomerCampaign.SOAPConsumer.Controllers
 
         [HttpPost]
         [Route(nameof(Sync))]
-        public async Task<JsonResult> Sync() => await _customerFactory.SyncCustomers();
+        public async Task<JsonResult> Sync([FromBody] SyncCustomersRq rq) => await _customerFactory.SyncCustomers(rq);
 
         [HttpPost]
         [Route(nameof(UpdateLoyaltyStatus))]
-        public async Task<JsonResult> UpdateLoyaltyStatus([FromBody] UpdateCustomerLoyaltyStatusRq request) => 
-            await _customerFactory.UpdateLoyaltyStatus(request);
+        public async Task<JsonResult> UpdateLoyaltyStatus([FromBody] UpdateCustomerLoyaltyStatusRq rq) => 
+            await _customerFactory.UpdateLoyaltyStatus(rq);
         
     }
 }

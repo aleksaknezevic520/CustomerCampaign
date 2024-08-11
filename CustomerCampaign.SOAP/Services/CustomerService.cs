@@ -1,4 +1,5 @@
-﻿using CustomerCampaign.Data.Interfaces;
+﻿using Azure.Core;
+using CustomerCampaign.Data.Interfaces;
 using CustomerCampaign.Repositories.Models;
 using CustomerCampaign.SOAP.Helpers;
 using CustomerCampaign.SOAP.Interfaces;
@@ -19,8 +20,13 @@ namespace CustomerCampaign.SOAP.Services
             _soapDemoClient = soapDemoClient;
         }
 
-        public async Task<SyncCustomersRs> SyncCustomers()
+        public async Task<SyncCustomersRs> SyncCustomers(SyncCustomersRq request)
         {
+            var validationResult = AuthHelper.ValidateToken(request.AuthToken);
+
+            if (validationResult.Invalid)
+                return new SyncCustomersRs(validationResult.Error);
+
             try
             {
                 var customerId = 1;
@@ -77,6 +83,11 @@ namespace CustomerCampaign.SOAP.Services
 
         public async Task<AddCustomerRs> AddCustomer(AddCustomerRq request)
         {
+            var validationResult = AuthHelper.ValidateToken(request.AuthToken);
+
+            if (validationResult.Invalid)
+                return new AddCustomerRs(validationResult.Error);
+
             try
             {
                 var customer = new Customer
@@ -102,6 +113,11 @@ namespace CustomerCampaign.SOAP.Services
 
         public async Task<UpdateCustomerLoyaltyStatusRs> UpdateCustomerLoyaltyStatus(UpdateCustomerLoyaltyStatusRq request)
         {
+            var validationResult = AuthHelper.ValidateToken(request.AuthToken);
+
+            if (validationResult.Invalid)
+                return new UpdateCustomerLoyaltyStatusRs(validationResult.Error);
+
             try
             {
                 var customer = _customerRepository.GetCustomerById(request.CustomerId);

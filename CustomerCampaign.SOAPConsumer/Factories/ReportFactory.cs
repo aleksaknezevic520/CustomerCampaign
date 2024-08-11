@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ReportService;
 using System;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace CustomerCampaign.SOAPConsumer.Factories
@@ -11,19 +10,22 @@ namespace CustomerCampaign.SOAPConsumer.Factories
     {
         private readonly ReportServiceClient _reportClient;
 
-        public ReportFactory()
+        public ReportFactory(ReportServiceClient reportClient)
         {
-            _reportClient = new ReportServiceClient(ReportServiceClient.EndpointConfiguration.BasicHttpBinding_IReportService);
+            _reportClient = reportClient;
         }
 
-        internal async Task<JsonResult> WriteCSVReport()
+        internal async Task<JsonResult> WriteCSVReport(WritePurchasesReportRq rq)
         {
-            var response = await _reportClient.WriteCSVPurchasesReportAsync();
+            var response = await _reportClient.WriteCSVPurchasesReportAsync(rq);
             return new JsonResult(response);
         }
 
-        internal async Task<JsonResult> ReadCSVReport(IFormFileCollection file)
+        internal async Task<JsonResult> ReadCSVReport(IFormFileCollection file, string authToken)
         {
+            if(string.IsNullOrEmpty(authToken))
+                return new JsonResult(new { Success = false, Error = "Not authenticated" });
+
             try
             {
                 byte[] bytes;
@@ -33,8 +35,13 @@ namespace CustomerCampaign.SOAPConsumer.Factories
                     stream.Read(bytes, 0, (int)file[0].Length);
                 }
 
-                var response = await _reportClient.ReadCSVPurchasesReportAsync(bytes);
-                return new JsonResult(response.Body.ReadCSVPurchasesReportResult);
+                var response = await _reportClient.ReadCSVPurchasesReportAsync(new ReadPurchasesReportRq
+                {
+                    AuthToken = authToken,
+                    CSVFile = bytes
+                });
+
+                return new JsonResult(response);
 
             }
             catch (Exception)

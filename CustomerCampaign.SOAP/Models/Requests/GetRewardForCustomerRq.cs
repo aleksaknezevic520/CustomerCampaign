@@ -3,11 +3,9 @@
 namespace CustomerCampaign.SOAP.Models.Requests
 {
     [DataContract]
-    public class UpdateCustomerLoyaltyStatusRq : RequestBase
+    public class GetRewardForCustomerRq : RequestBase
     {
         [DataMember]
         public int CustomerId { get; set; }
-        [DataMember]
-        public bool IsLoyal { get; set; }
     }
 }

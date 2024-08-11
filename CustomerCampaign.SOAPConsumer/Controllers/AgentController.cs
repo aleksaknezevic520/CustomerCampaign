@@ -1,5 +1,5 @@
-﻿using CustomerCampaign.SOAPConsumer.Factories;
-using CustomerCampaign.SOAPConsumer.Models;
+﻿using AgentService;
+using CustomerCampaign.SOAPConsumer.Factories;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -18,6 +18,6 @@ namespace CustomerCampaign.SOAPConsumer.Controllers
 
         [HttpPost]
         [Route(nameof(Create))]
-        public async Task<JsonResult> Create(CreateAgent request) => await _agentFactory.CreateAgent(request);
+        public async Task<JsonResult> Create([FromBody] CreateAgentRq request) => await _agentFactory.CreateAgent(request);
     }
 }

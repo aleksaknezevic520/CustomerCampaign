@@ -21,9 +21,14 @@ namespace CustomerCampaign.SOAP.Services
             if (request == null)
                 return new CreateAgentRs("Request object is null");
 
+            var validationResult = AuthHelper.ValidateToken(request.AuthToken);
+
+            if (validationResult.Invalid)
+                return new CreateAgentRs(validationResult.Error);
+
             try
             {
-                var agent = await _agentRepository.GetAgentByEmail(request.Email);
+                var agent = await _agentRepository.GetAgentByEmailAsync(request.Email);
 
                 if(agent is not null)
                     return new CreateAgentRs("Email already exists");

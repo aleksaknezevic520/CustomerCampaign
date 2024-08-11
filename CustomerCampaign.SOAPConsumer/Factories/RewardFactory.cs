@@ -9,32 +9,32 @@ namespace CustomerCampaign.SOAPConsumer.Factories
     {
         private readonly RewardServiceClient _rewardClient;
 
-        public RewardFactory()
+        public RewardFactory(RewardServiceClient rewardClient)
         {
-            _rewardClient = new RewardServiceClient(RewardServiceClient.EndpointConfiguration.BasicHttpBinding_IRewardService);
+            _rewardClient = rewardClient;
         }
 
-        internal async Task<JsonResult> GetRewardById(int agentId, int customerId)
+        internal async Task<JsonResult> GetRewardById(GetRewardByIdRq rq)
         {
-            var response = await _rewardClient.GetRewardByIdAsync(agentId, customerId);
+            var response = await _rewardClient.GetRewardByIdAsync(rq);
             return new JsonResult(response);
         }
 
-        internal async Task<JsonResult> GetRewards()
+        internal async Task<JsonResult> GetRewards(GetRewardsRq rq)
         {
-            var response = await _rewardClient.GetRewardsAsync();
+            var response = await _rewardClient.GetRewardsAsync(rq);
             return new JsonResult(response);
         }
 
-        internal async Task<JsonResult> GetRewardForCustomer(int customerId)
+        internal async Task<JsonResult> GetRewardForCustomer(GetRewardForCustomerRq rq)
         {
-            var response = await _rewardClient.GetRewardForCustomerAsync(customerId);
+            var response = await _rewardClient.GetRewardForCustomerAsync(rq);
             return new JsonResult(response);
         }
 
-        internal async Task<JsonResult> GetRewardsForAgent(int agentId)
+        internal async Task<JsonResult> GetRewardsForAgent(GetRewardsForAgentRq rq)
         {
-            var response = await _rewardClient.GetRewardsForAgentAsync(agentId);
+            var response = await _rewardClient.GetRewardsForAgentAsync(rq);
             return new JsonResult(response);
         }
 
@@ -50,13 +50,9 @@ namespace CustomerCampaign.SOAPConsumer.Factories
             return new JsonResult(response);
         }
 
-        internal async Task<JsonResult> DeleteReward(int agentId, int customerId)
+        internal async Task<JsonResult> DeleteReward(DeleteRewardRq rq)
         {
-            var response = await _rewardClient.DeleteRewardAsync(new DeleteRewardRq
-            {
-                AgentId = agentId,
-                CustomerId = customerId
-            });
+            var response = await _rewardClient.DeleteRewardAsync(rq);
             return new JsonResult(response);
         }
     }
