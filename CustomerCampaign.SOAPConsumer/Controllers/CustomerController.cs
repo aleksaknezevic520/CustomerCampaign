@@ -1,4 +1,5 @@
 ﻿using CustomerCampaign.SOAPConsumer.Factories;
+using CustomerService;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -18,8 +19,13 @@ namespace CustomerCampaign.SOAPConsumer.Controllers
         }
 
         [HttpPost]
-        [Route(nameof(SyncCustomers))]
-        public async Task<JsonResult> SyncCustomers() => await _customerFactory.SyncCustomers();
+        [Route(nameof(Sync))]
+        public async Task<JsonResult> Sync() => await _customerFactory.SyncCustomers();
+
+        [HttpPost]
+        [Route(nameof(UpdateLoyaltyStatus))]
+        public async Task<JsonResult> UpdateLoyaltyStatus([FromBody] UpdateCustomerLoyaltyStatusRq request) => 
+            await _customerFactory.UpdateLoyaltyStatus(request);
         
     }
 }

@@ -19,36 +19,36 @@ namespace CustomerCampaign.SOAPConsumer.Controllers
         }
 
         [HttpGet]
-        [Route("Get")]
+        [Route(nameof(Get))]
         public async Task<JsonResult> Get(int agentId, int customerId) => 
             await _rewardFactory.GetRewardById(agentId, customerId);
 
         [HttpGet]
-        [Route("GetAll")]
-        public async Task<JsonResult> Get() => await _rewardFactory.GetRewards();
+        [Route(nameof(GetAll))]
+        public async Task<JsonResult> GetAll() => await _rewardFactory.GetRewards();
 
         [HttpGet]
-        [Route("GetAllForAgent")]
+        [Route(nameof(GetRewardsForAgent))]
         public async Task<JsonResult> GetRewardsForAgent(int agentId) => 
             await _rewardFactory.GetRewardsForAgent(agentId);
 
         [HttpGet]
-        [Route("GetAllForCustomer")]
+        [Route(nameof(GetRewardsForCustomer))]
         public async Task<JsonResult> GetRewardsForCustomer(int customerId) => 
-            await _rewardFactory.GetRewardsForCustomer(customerId);
+            await _rewardFactory.GetRewardForCustomer(customerId);
 
         [HttpPost]
-        [Route("Add")]
+        [Route(nameof(Add))]
         public async Task<JsonResult> Add([FromBody] AddRewardRq request) => 
             await _rewardFactory.AddReward(request);
 
         [HttpPut]
-        [Route("Update")]
+        [Route(nameof(Update))]
         public async Task<JsonResult> Update([FromBody] UpdateRewardRq request) => 
             await _rewardFactory.UpdateReward(request);
 
         [HttpDelete]
-        [Route("Delete")]
+        [Route(nameof(Delete))]
         public async Task<JsonResult> Delete(int agentId, int customerId) => 
             await _rewardFactory.DeleteReward(agentId, customerId);
     }

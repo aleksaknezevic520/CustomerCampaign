@@ -17,7 +17,7 @@ namespace CustomerCampaign.SOAP.Interfaces
         Task<GetRewardsRs> GetRewardsForAgent(int AgentId);
 
         [OperationContract]
-        Task<GetRewardsRs> GetRewardsForCustomer(int customerId);
+        Task<GetRewardRs> GetRewardForCustomer(int customerId);
 
         [OperationContract]
         Task<AddRewardRs> AddReward(AddRewardRq rq);

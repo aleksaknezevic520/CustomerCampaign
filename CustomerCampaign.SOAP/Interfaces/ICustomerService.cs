@@ -8,9 +8,12 @@ namespace CustomerCampaign.SOAP.Interfaces
     public interface ICustomerService
     {
         [OperationContract]
-        Task<SyncCustomersRs> SyncCustomers(SyncCustomersRq request);
+        Task<SyncCustomersRs> SyncCustomers();
 
         [OperationContract]
         Task<AddCustomerRs> AddCustomer(AddCustomerRq request);
+
+        [OperationContract]
+        Task<UpdateCustomerLoyaltyStatusRs> UpdateCustomerLoyaltyStatus(UpdateCustomerLoyaltyStatusRq request);
     }
 }

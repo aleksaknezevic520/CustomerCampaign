@@ -23,6 +23,11 @@ namespace CustomerCampaign.SOAP.Services
 
             try
             {
+                var agent = await _agentRepository.GetAgentByEmail(request.Email);
+
+                if(agent is not null)
+                    return new CreateAgentRs("Email already exists");
+
                 var (hashedPassword, salt) = PasswordHelper.HashPassword(request.Password);
 
                 _agentRepository.CreateAgent(new Agent

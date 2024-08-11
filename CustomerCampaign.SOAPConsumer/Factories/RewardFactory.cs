@@ -26,9 +26,9 @@ namespace CustomerCampaign.SOAPConsumer.Factories
             return new JsonResult(response);
         }
 
-        internal async Task<JsonResult> GetRewardsForCustomer(int customerId)
+        internal async Task<JsonResult> GetRewardForCustomer(int customerId)
         {
-            var response = await _rewardClient.GetRewardsForCustomerAsync(customerId);
+            var response = await _rewardClient.GetRewardForCustomerAsync(customerId);
             return new JsonResult(response);
         }
 

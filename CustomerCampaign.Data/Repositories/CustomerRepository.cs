@@ -10,11 +10,6 @@ namespace CustomerCampaign.Data.Repositories
 
         }
 
-        public void AddCustomer(Customer customer)
-        {
-            DataContext.Customers.Add(customer);
-        }
-
         public Customer GetCustomerById(int id)
         {
             return DataContext.Customers.SingleOrDefault(x => x.Id == id);
@@ -23,6 +18,16 @@ namespace CustomerCampaign.Data.Repositories
         public Customer GetCustomerBySSN(string ssn)
         {
             return DataContext.Customers.SingleOrDefault(x => x.SSN == ssn);
+        }
+
+        public void AddCustomer(Customer customer)
+        {
+            DataContext.Customers.Add(customer);
+        }
+
+        public void AddCustomers(List<Customer> customers)
+        {
+            DataContext.Customers.AddRange(customers);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CustomerCampaign.Data.Interfaces;
 using CustomerCampaign.Repositories.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CustomerCampaign.Data.Repositories
 {
@@ -12,6 +13,11 @@ namespace CustomerCampaign.Data.Repositories
         public Agent GetAgentById(int id)
         {
             return DataContext.Agents.Find(id);
+        }
+
+        public async Task<Agent> GetAgentByEmail(string email)
+        {
+            return await DataContext.Agents.SingleOrDefaultAsync(x => x.Email == email);
         }
 
         public void CreateAgent(Agent agent)

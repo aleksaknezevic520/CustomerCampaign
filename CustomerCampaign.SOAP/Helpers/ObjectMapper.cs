@@ -17,6 +17,15 @@ namespace CustomerCampaign.SOAP.Helpers
                 Zip = customerAddress.Zip
             };
 
+        internal static Address MapCustomerAddress(SOAPDemo.Address customerAddress) =>
+            customerAddress == null ? null : new Address
+            {
+                City = customerAddress.City,
+                State = customerAddress.State,
+                Street = customerAddress.Street,
+                Zip = customerAddress.Zip
+            };
+
         internal static List<RewardCommon> MapRewards(List<Reward> rewards) =>
             rewards.Select(x => new RewardCommon
             {

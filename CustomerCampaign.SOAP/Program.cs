@@ -24,6 +24,9 @@ builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<IAgentService, AgentService>();
 builder.Services.AddScoped<IReportService, ReportService>();
 
+// External services
+builder.Services.AddScoped<SOAPDemo.SOAPDemoSoapClient>();
+
 // Repositories
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IAgentRepository, AgentRepository>();

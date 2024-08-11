@@ -387,8 +387,8 @@ namespace RewardService
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRewardService/GetRewardsForAgent", ReplyAction="http://tempuri.org/IRewardService/GetRewardsForAgentResponse")]
         System.Threading.Tasks.Task<RewardService.GetRewardsRs> GetRewardsForAgentAsync(int AgentId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRewardService/GetRewardsForCustomer", ReplyAction="http://tempuri.org/IRewardService/GetRewardsForCustomerResponse")]
-        System.Threading.Tasks.Task<RewardService.GetRewardsRs> GetRewardsForCustomerAsync(int customerId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRewardService/GetRewardForCustomer", ReplyAction="http://tempuri.org/IRewardService/GetRewardForCustomerResponse")]
+        System.Threading.Tasks.Task<RewardService.GetRewardRs> GetRewardForCustomerAsync(int customerId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRewardService/AddReward", ReplyAction="http://tempuri.org/IRewardService/AddRewardResponse")]
         System.Threading.Tasks.Task<RewardService.AddRewardRs> AddRewardAsync(RewardService.AddRewardRq rq);
@@ -465,9 +465,9 @@ namespace RewardService
             return base.Channel.GetRewardsForAgentAsync(AgentId);
         }
         
-        public System.Threading.Tasks.Task<RewardService.GetRewardsRs> GetRewardsForCustomerAsync(int customerId)
+        public System.Threading.Tasks.Task<RewardService.GetRewardRs> GetRewardForCustomerAsync(int customerId)
         {
-            return base.Channel.GetRewardsForCustomerAsync(customerId);
+            return base.Channel.GetRewardForCustomerAsync(customerId);
         }
         
         public System.Threading.Tasks.Task<RewardService.AddRewardRs> AddRewardAsync(RewardService.AddRewardRq rq)

@@ -4,53 +4,70 @@ using CustomerCampaign.SOAP.Helpers;
 using CustomerCampaign.SOAP.Interfaces;
 using CustomerCampaign.SOAP.Models.Requests;
 using CustomerCampaign.SOAP.Models.Responses;
+using SOAPDemo;
 
 namespace CustomerCampaign.SOAP.Services
 {
     public class CustomerService : ICustomerService
     {
         private readonly ICustomerRepository _customerRepository;
+        private readonly SOAPDemoSoapClient _soapDemoClient;
 
-        public CustomerService(ICustomerRepository customerRepository)
+        public CustomerService(ICustomerRepository customerRepository, SOAPDemoSoapClient soapDemoClient)
         {
             _customerRepository = customerRepository;
+            _soapDemoClient = soapDemoClient;
         }
 
-        public async Task<SyncCustomersRs> SyncCustomers(SyncCustomersRq request)
+        public async Task<SyncCustomersRs> SyncCustomers()
         {
-            if (request == null)
-                return new SyncCustomersRs("Request object is null");
-
             try
             {
-                foreach (var customerRq in request.Customers)
+                var customerId = 1;
+                var customers = new List<Customer>();
+                do
                 {
-                    var customer = _customerRepository.GetCustomerBySSN(customerRq.SSN);
-                    var homeAddress = ObjectMapper.MapCustomerAddress(customerRq.HomeAddress);
-                    var workAddress = ObjectMapper.MapCustomerAddress(customerRq.WorkAddress);
+                    var customerExternal = await _soapDemoClient.FindPersonAsync(customerId.ToString());
+
+                    // No more customers, exit the loop
+                    if (customerExternal == null)
+                        break;
+
+                    var homeAddress = ObjectMapper.MapCustomerAddress(customerExternal.Home);
+                    var workAddress = ObjectMapper.MapCustomerAddress(customerExternal.Office);
+
+                    var customer = _customerRepository.GetCustomerBySSN(customerExternal.SSN);
                     if (customer == null)
                     {
-                        _customerRepository.AddCustomer(new Customer
+                        var newCustomer = new Customer
                         {
-                            Name = customerRq.Name,
-                            SSN = customerRq.SSN,
-                            DateOfBirth = customerRq.DateOfBirth,
-                            IsLoyal = true,
+                            Name = customerExternal.Name,
+                            SSN = customerExternal.SSN,
+                            DateOfBirth = customerExternal.DOB,
                             HomeAddress = homeAddress,
                             WorkAddress = workAddress
-                        });
-                        continue;
-                    }
-                    // Update customer
-                    customer.Name = customerRq.Name;
-                    customer.DateOfBirth = customerRq.DateOfBirth;
-                    customer.HomeAddress = homeAddress;
-                    customer.WorkAddress = workAddress;
-                }
+                        };
 
+                        customers.Add(newCustomer);
+                    }
+                    else
+                    {
+
+                        // Update customer
+                        customer.Name = customerExternal.Name;
+                        customer.DateOfBirth = customerExternal.DOB;
+                        customer.HomeAddress = homeAddress;
+                        customer.WorkAddress = workAddress;
+                    }
+
+                    customerId++;
+                } while (true);
+
+                _customerRepository.AddCustomers(customers);
                 await _customerRepository.CommitAsync();
 
                 return new SyncCustomersRs(null);
+
             }
             catch (Exception)
             {
@@ -80,6 +97,27 @@ namespace CustomerCampaign.SOAP.Services
             catch (Exception)
             {
                 return new AddCustomerRs("Unknown error occurred while saving customer");
+            }
+        }
+
+        public async Task<UpdateCustomerLoyaltyStatusRs> UpdateCustomerLoyaltyStatus(UpdateCustomerLoyaltyStatusRq request)
+        {
+            try
+            {
+                var customer = _customerRepository.GetCustomerById(request.CustomerId);
+
+                if(customer == null)
+                    return new UpdateCustomerLoyaltyStatusRs("Customer not found");
+
+                customer.IsLoyal = request.IsLoyal;
+
+                await _customerRepository.CommitAsync();
+
+                return new UpdateCustomerLoyaltyStatusRs(null);
+            }
+            catch (Exception)
+            {
+                return new UpdateCustomerLoyaltyStatusRs("Unknown error occurred");
             }
         }
     }

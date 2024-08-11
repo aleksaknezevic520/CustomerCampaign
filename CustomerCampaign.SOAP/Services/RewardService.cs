@@ -74,20 +74,20 @@ namespace CustomerCampaign.SOAP.Services
             }
         }
 
-        public async Task<GetRewardsRs> GetRewardsForCustomer(int customerId)
+        public async Task<GetRewardRs> GetRewardForCustomer(int customerId)
         {
             try
             {
-                var rewards = await _rewardRepository.GetRewardsForCustomerAsync(customerId);
+                var reward = await _rewardRepository.GetRewardForCustomerAsync(customerId);
 
-                var response = new GetRewardsRs(null);
-                response.Rewards = ObjectMapper.MapRewards(rewards);
+                var response = new GetRewardRs(null);
+                response.Reward = ObjectMapper.MapReward(reward);
 
                 return response;
             }
             catch (Exception)
             {
-                return new GetRewardsRs("Unkown error occurred while getting customer rewards for agent");
+                return new GetRewardRs("Unkown error occurred while getting customer rewards for agent");
             }
         }
 
@@ -110,7 +110,7 @@ namespace CustomerCampaign.SOAP.Services
             if (customer is not { IsLoyal: true })
                 return new AddRewardRs("Loyalty customer not found");
 
-            var reward = await _rewardRepository.GetRewardByIdAsync(rq.AgentId, rq.CustomerId);
+            var reward = await _rewardRepository.GetRewardForCustomerAsync(rq.CustomerId);
             if (reward is not null)
                 return new AddRewardRs("Reward already exists for the customer");
 

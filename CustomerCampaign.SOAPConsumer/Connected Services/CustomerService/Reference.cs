@@ -14,31 +14,69 @@ namespace CustomerService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SyncCustomersRq", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Requests")]
-    public partial class SyncCustomersRq : object
+    [System.Runtime.Serialization.DataContractAttribute(Name="ResponseBase", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Responses")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CustomerService.AddCustomerRs))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CustomerService.UpdateCustomerLoyaltyStatusRs))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CustomerService.SyncCustomersRs))]
+    public partial class ResponseBase : object
     {
         
-        private CustomerService.Customer[] CustomersField;
+        private string ErrorMessageField;
+        
+        private bool SuccessField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public CustomerService.Customer[] Customers
+        public string ErrorMessage
         {
             get
             {
-                return this.CustomersField;
+                return this.ErrorMessageField;
             }
             set
             {
-                this.CustomersField = value;
+                this.ErrorMessageField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Success
+        {
+            get
+            {
+                return this.SuccessField;
+            }
+            set
+            {
+                this.SuccessField = value;
             }
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Customer", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.Infrastructure.Models.Co" +
-        "mmon")]
-    public partial class Customer : object
+    [System.Runtime.Serialization.DataContractAttribute(Name="AddCustomerRs", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Responses")]
+    public partial class AddCustomerRs : CustomerService.ResponseBase
+    {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="UpdateCustomerLoyaltyStatusRs", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Responses")]
+    public partial class UpdateCustomerLoyaltyStatusRs : CustomerService.ResponseBase
+    {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SyncCustomersRs", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Responses")]
+    public partial class SyncCustomersRs : CustomerService.ResponseBase
+    {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AddCustomerRq", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Requests")]
+    public partial class AddCustomerRq : object
     {
         
         private System.Nullable<System.DateTime> DateOfBirthField;
@@ -187,135 +225,37 @@ namespace CustomerService
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ResponseBase", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Responses")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CustomerService.AddCustomerRs))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(CustomerService.SyncCustomersRs))]
-    public partial class ResponseBase : object
+    [System.Runtime.Serialization.DataContractAttribute(Name="UpdateCustomerLoyaltyStatusRq", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Requests")]
+    public partial class UpdateCustomerLoyaltyStatusRq : object
     {
         
-        private string ErrorMessageField;
+        private int CustomerIdField;
         
-        private bool SuccessField;
+        private bool IsLoyalField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ErrorMessage
+        public int CustomerId
         {
             get
             {
-                return this.ErrorMessageField;
+                return this.CustomerIdField;
             }
             set
             {
-                this.ErrorMessageField = value;
+                this.CustomerIdField = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Success
+        public bool IsLoyal
         {
             get
             {
-                return this.SuccessField;
+                return this.IsLoyalField;
             }
             set
             {
-                this.SuccessField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AddCustomerRs", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Responses")]
-    public partial class AddCustomerRs : CustomerService.ResponseBase
-    {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SyncCustomersRs", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Responses")]
-    public partial class SyncCustomersRs : CustomerService.ResponseBase
-    {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AddCustomerRq", Namespace="http://schemas.datacontract.org/2004/07/CustomerCampaign.SOAP.Models.Requests")]
-    public partial class AddCustomerRq : object
-    {
-        
-        private System.Nullable<System.DateTime> DateOfBirthField;
-        
-        private CustomerService.Address HomeAddressField;
-        
-        private string NameField;
-        
-        private string SSNField;
-        
-        private CustomerService.Address WorkAddressField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<System.DateTime> DateOfBirth
-        {
-            get
-            {
-                return this.DateOfBirthField;
-            }
-            set
-            {
-                this.DateOfBirthField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public CustomerService.Address HomeAddress
-        {
-            get
-            {
-                return this.HomeAddressField;
-            }
-            set
-            {
-                this.HomeAddressField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name
-        {
-            get
-            {
-                return this.NameField;
-            }
-            set
-            {
-                this.NameField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string SSN
-        {
-            get
-            {
-                return this.SSNField;
-            }
-            set
-            {
-                this.SSNField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public CustomerService.Address WorkAddress
-        {
-            get
-            {
-                return this.WorkAddressField;
-            }
-            set
-            {
-                this.WorkAddressField = value;
+                this.IsLoyalField = value;
             }
         }
     }
@@ -326,10 +266,13 @@ namespace CustomerService
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerService/SyncCustomers", ReplyAction="http://tempuri.org/ICustomerService/SyncCustomersResponse")]
-        System.Threading.Tasks.Task<CustomerService.SyncCustomersRs> SyncCustomersAsync(CustomerService.SyncCustomersRq request);
+        System.Threading.Tasks.Task<CustomerService.SyncCustomersRs> SyncCustomersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerService/AddCustomer", ReplyAction="http://tempuri.org/ICustomerService/AddCustomerResponse")]
         System.Threading.Tasks.Task<CustomerService.AddCustomerRs> AddCustomerAsync(CustomerService.AddCustomerRq request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICustomerService/UpdateCustomerLoyaltyStatus", ReplyAction="http://tempuri.org/ICustomerService/UpdateCustomerLoyaltyStatusResponse")]
+        System.Threading.Tasks.Task<CustomerService.UpdateCustomerLoyaltyStatusRs> UpdateCustomerLoyaltyStatusAsync(CustomerService.UpdateCustomerLoyaltyStatusRq request);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
@@ -382,14 +325,19 @@ namespace CustomerService
         {
         }
         
-        public System.Threading.Tasks.Task<CustomerService.SyncCustomersRs> SyncCustomersAsync(CustomerService.SyncCustomersRq request)
+        public System.Threading.Tasks.Task<CustomerService.SyncCustomersRs> SyncCustomersAsync()
         {
-            return base.Channel.SyncCustomersAsync(request);
+            return base.Channel.SyncCustomersAsync();
         }
         
         public System.Threading.Tasks.Task<CustomerService.AddCustomerRs> AddCustomerAsync(CustomerService.AddCustomerRq request)
         {
             return base.Channel.AddCustomerAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<CustomerService.UpdateCustomerLoyaltyStatusRs> UpdateCustomerLoyaltyStatusAsync(CustomerService.UpdateCustomerLoyaltyStatusRq request)
+        {
+            return base.Channel.UpdateCustomerLoyaltyStatusAsync(request);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

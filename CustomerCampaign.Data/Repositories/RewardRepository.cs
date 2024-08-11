@@ -1,7 +1,6 @@
 ﻿using CustomerCampaign.Data.Interfaces;
 using CustomerCampaign.Repositories.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata.Ecma335;
 
 namespace CustomerCampaign.Data.Repositories
 {
@@ -21,11 +20,9 @@ namespace CustomerCampaign.Data.Repositories
             return await DataContext.Rewards.ToListAsync();
         }
 
-        public async Task<List<Reward>> GetRewardsForCustomerAsync(int customerId)
+        public async Task<Reward> GetRewardForCustomerAsync(int customerId)
         {
-            return await DataContext.Rewards
-                .Where(x => x.CustomerId == customerId)
-                .ToListAsync();
+            return await DataContext.Rewards.SingleOrDefaultAsync(x => x.CustomerId == customerId);
         }
 
         public async Task<List<Reward>> GetRewardsForAgentAsync(int agentId)
